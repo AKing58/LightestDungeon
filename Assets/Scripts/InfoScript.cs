@@ -8,22 +8,23 @@ public class InfoScript : MonoBehaviour
 {
     public Text infotxt;
     public StringBuilder info;
+    private BattleScript thisBattle;
     // Start is called before the first frame update
     void Start()
     {
-        
+        thisBattle = BattleScript.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         info = new StringBuilder("Classes:\n");
-        for(int i = 0; i < BattleScript.playerList.Count; i++)
+        for(int i = 0; i < thisBattle.playerList.Count; i++)
         {
-            info.Append(BattleScript.playerList[i].Name + "\n");
-            info.Append(BattleScript.playerList[i].Classname + "\n");
-            info.Append(BattleScript.playerList[i].Health + "\n");
-            if(i != BattleScript.playerList.Count - 1)
+            info.Append(thisBattle.playerList[i].Name + "\n");
+            info.Append(thisBattle.playerList[i].Classname + "\n");
+            info.Append(thisBattle.playerList[i].Health + "\n");
+            if(i != thisBattle.playerList.Count - 1)
                 info.Append("-------------\n");
         }
         infotxt.text = info.ToString();

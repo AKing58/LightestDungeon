@@ -11,10 +11,9 @@ public class Entity
     public int Health { get; set; }
     public int Attack { get; set; }
     public int Defence { get; set; }
-    public List<Move> Moveset { get; set; }
     public Equipment[] Loadout { get; set; }
 
-    public Entity(int lv, int hp, int att, int def)
+    public Entity(string name, int lv, int hp, int att, int def)
     {
         Level = lv;
         Health = hp;

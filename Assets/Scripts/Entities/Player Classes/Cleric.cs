@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 class Cleric : Entity
 {
-    public Cleric(int lv, int hp, int att, int def) : base(lv, hp, att, def)
+    public Cleric(string name, int lv, int hp, int att, int def) : base(name, lv, hp, att, def)
     {
         Classname = "Cleric";
     }

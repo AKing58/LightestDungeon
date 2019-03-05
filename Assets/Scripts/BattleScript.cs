@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class BattleScript : MonoBehaviour
 {
-    public static List<Player> playerList;
+    public static BattleScript instance = null;
+    public List<Entity> playerList;
+    public List<Entity> enemyList;
     // Start is called before the first frame update
     void Start()
     {
-        playerList.Add(new Player("Reynauld", "Knight", 15));
+        if(instance == null)
+        {
+            instance = this;
+        }
+        playerList.Add(new Knight("Reynauld", 1, 10, 10, 10));
+        playerList.Add(new Rogue("Dismas", 1, 8, 14, 8));
     }
 
     // Update is called once per frame
@@ -16,8 +23,12 @@ public class BattleScript : MonoBehaviour
     {
         
     }
-    public void addPlayer(Player player)
+    public void addPlayer(Entity player)
     {
         playerList.Add(player);
+    }
+    public void addEntity(Entity enemy)
+    {
+        enemyList.Add(enemy);
     }
 }
