@@ -15,6 +15,7 @@ public class Entity
 
     public Entity(string name, int lv, int hp, int att, int def)
     {
+        Name = name;
         Level = lv;
         Health = hp;
         Attack = att;

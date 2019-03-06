@@ -8,7 +8,7 @@ public class InfoScript : MonoBehaviour
 {
     public Text infotxt;
     public StringBuilder info;
-    private BattleScript thisBattle;
+    public BattleScript thisBattle;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +18,15 @@ public class InfoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        info = new StringBuilder("Classes:\n");
+        info = new StringBuilder("Party:\n");
         for(int i = 0; i < thisBattle.playerList.Count; i++)
         {
             info.Append(thisBattle.playerList[i].Name + "\n");
             info.Append(thisBattle.playerList[i].Classname + "\n");
-            info.Append(thisBattle.playerList[i].Health + "\n");
-            if(i != thisBattle.playerList.Count - 1)
+            info.Append("HP: " + thisBattle.playerList[i].Health + "\n");
+            info.Append("Att: " + thisBattle.playerList[i].Attack + "\n");
+            info.Append("Def: " + thisBattle.playerList[i].Defence + "\n");
+            if (i != thisBattle.playerList.Count - 1)
                 info.Append("-------------\n");
         }
         infotxt.text = info.ToString();

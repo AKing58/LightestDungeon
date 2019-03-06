@@ -11,11 +11,11 @@ public class BattleScript : MonoBehaviour
     void Start()
     {
         if(instance == null)
-        {
             instance = this;
-        }
-        playerList.Add(new Knight("Reynauld", 1, 10, 10, 10));
-        playerList.Add(new Rogue("Dismas", 1, 8, 14, 8));
+        //playerList.Add(new Knight("Reynauld", 1, 10, 10, 10));
+        //playerList.Add(new Rogue("Dismas", 1, 8, 14, 8));
+        //playerList.Add(new Cleric("Anduin", 1, 10, 8, 14));
+        //playerList.Add(new Mage("Dorf", 1, 10, 12, 8));
     }
 
     // Update is called once per frame

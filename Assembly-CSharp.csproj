@@ -67,6 +67,8 @@
      <Compile Include="Assets\Scripts\InfoScript.cs" />
      <Compile Include="Assets\Scripts\MoveInfoPanel.cs" />
      <Compile Include="Assets\Scripts\RaySelection.cs" />
+     <Compile Include="Assets\Scripts\SelectPartyScript.cs" />
+     <Compile Include="Assets\Scripts\SetPartyScript.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Adam/Documents/GitHub/LightestDungeon/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
