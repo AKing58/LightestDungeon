@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 613, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 8722
+  controlID: 5254
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 8614
+  controlID: 5101
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_MinSize: {x: 104, y: 248}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-  controlID: 8679
+  controlID: 5255
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -407,9 +407,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 822e0000
-      m_LastClickedID: 11906
-      m_ExpandedIDs: 5cf7fffff02d0000fc2d0000d82e00007c2f0000
+      m_SelectedIDs: 46280000
+      m_LastClickedID: 0
+      m_ExpandedIDs: b4fbffff92290000b4290000722a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -471,7 +471,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Resources/Textures/Materials
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -483,7 +483,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b6280000
     m_LastClickedID: 10422
-    m_ExpandedIDs: ffffffff000000001c2b00004c2b0000842b0000be2b0000962c0000bc2c000008330000
+    m_ExpandedIDs: ffffffff000000005e26000092260000cc260000042700000e270000f82700001e280000642800008c280000a42e000024460000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -511,7 +511,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000001c2b00004c2b0000842b0000be2b0000962c0000bc2c000008330000
+    m_ExpandedIDs: ffffffff000000005e26000092260000cc260000042700000e270000f82700001e280000642800008c280000a42e000024460000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -631,9 +631,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.14696206, y: -0.65877014, z: 0.13340962, w: 0.72569007}
   m_Size:
-    m_Target: 9.714813
+    m_Target: 8.37612
     speed: 2
-    m_Value: 9.714813
+    m_Value: 8.37612
   m_Ortho:
     m_Target: 0
     speed: 2
