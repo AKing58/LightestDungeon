@@ -11,6 +11,7 @@ public class Entity
     public int Health { get; set; }
     public int Attack { get; set; }
     public int Defence { get; set; }
+    public string Position { get; set; }
     public Equipment[] Loadout { get; set; }
 
     public Entity(string name, int lv, int hp, int att, int def)
@@ -20,6 +21,7 @@ public class Entity
         Health = hp;
         Attack = att;
         Defence = def;
+        Position = "Front";
     }
 
 }
