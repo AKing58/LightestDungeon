@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-class Rogue : Entity
+public class Rogue : Entity
 {
     public Rogue(string name, int lv, int hp, int att, int def) : base(name, lv, hp, att, def)
     {
