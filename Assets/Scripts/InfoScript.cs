@@ -12,7 +12,8 @@ public class InfoScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thisBattle = BattleScript.instance;
+        if (BattleScript.instance == null)
+            Instantiate(thisBattle);
     }
 
     // Update is called once per frame
