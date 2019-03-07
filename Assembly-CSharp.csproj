@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BattleScript.cs" />
+     <Compile Include="Assets\Scripts\CharacterInfoPanelScript.cs" />
      <Compile Include="Assets\Scripts\Entities\Entity.cs" />
      <Compile Include="Assets\Scripts\Entities\Player Classes\Cleric.cs" />
      <Compile Include="Assets\Scripts\Entities\Player Classes\Knight.cs" />

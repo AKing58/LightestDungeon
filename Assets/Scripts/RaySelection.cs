@@ -22,17 +22,15 @@ public class RaySelection : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
             {
-                InfoDisplay.changeName(hit.collider.gameObject.name);
-                //thisBattle.addPlayer(new Knight("Reynauld", 1, 10, 10, 10));
-                //if((hit.collider.gameObject.name.Contains("Player") ||
-                //    hit.collider.gameObject.name.Contains("Enemy")
-                //    ) && !hit.collider.gameObject.name.Contains("Base"))
-                //{
-                //    InfoDisplay.changeName(hit.collider.gameObject.name);
-                //    if (hit.collider.gameObject.name.Contains("Enemy")){
-                //        InfoDisplay.changeName(hit.collider.gameObject.name);
-                //    }
-                //}
+                if(hit.collider.gameObject.name.Contains("Player") ||
+                    hit.collider.gameObject.name.Contains("Enemy")
+                    )
+                {
+                    InfoDisplay.changeName(hit.collider.gameObject.name);
+                    if (hit.collider.gameObject.name.Contains("Enemy")){
+                        InfoDisplay.changeName(hit.collider.gameObject.name);
+                    }
+                }
 
             }
         }

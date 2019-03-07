@@ -3324,11 +3324,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: Knight
       m_Image: {fileID: 0}
-    - m_Text: Mage
+    - m_Text: Rogue
       m_Image: {fileID: 0}
     - m_Text: Cleric
       m_Image: {fileID: 0}
-    - m_Text: Rogue
+    - m_Text: Mage
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5572,7 +5572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &765552927
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8167,11 +8167,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: Knight
       m_Image: {fileID: 0}
-    - m_Text: Mage
+    - m_Text: Rogue
       m_Image: {fileID: 0}
     - m_Text: Cleric
       m_Image: {fileID: 0}
-    - m_Text: Rogue
+    - m_Text: Mage
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8866,6 +8866,7 @@ GameObject:
   - component: {fileID: 1219155484}
   - component: {fileID: 1219155486}
   - component: {fileID: 1219155485}
+  - component: {fileID: 1219155487}
   m_Layer: 5
   m_Name: CharacterInfoPanel3
   m_TagString: Untagged
@@ -8935,6 +8936,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219155483}
   m_CullTransparentMesh: 0
+--- !u!114 &1219155487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219155483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0dee6ae03ba8142ada100d983b3c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisBattle: {fileID: 1067655597}
+  ClassTxt: {fileID: 2029751591}
+  NameTxt: {fileID: 1879506861}
+  HPTxt: {fileID: 1051135750}
+  AttackTxt: {fileID: 610277577}
+  DefenceTxt: {fileID: 1663995721}
+  panelNo: 3
 --- !u!1 &1223151353
 GameObject:
   m_ObjectHideFlags: 0
@@ -9322,11 +9342,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: Knight
       m_Image: {fileID: 0}
-    - m_Text: Mage
+    - m_Text: Rogue
       m_Image: {fileID: 0}
     - m_Text: Cleric
       m_Image: {fileID: 0}
-    - m_Text: Rogue
+    - m_Text: Mage
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10740,7 +10760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1419365847
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11158,7 +11178,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482291340}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 628ec22013754fd41ba04b04967cb925, type: 3}
   m_Name: 
@@ -11690,6 +11710,7 @@ GameObject:
   - component: {fileID: 1551177007}
   - component: {fileID: 1551177009}
   - component: {fileID: 1551177008}
+  - component: {fileID: 1551177010}
   m_Layer: 5
   m_Name: CharacterInfoPanel4
   m_TagString: Untagged
@@ -11759,6 +11780,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551177006}
   m_CullTransparentMesh: 0
+--- !u!114 &1551177010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551177006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0dee6ae03ba8142ada100d983b3c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisBattle: {fileID: 1067655597}
+  ClassTxt: {fileID: 512576268}
+  NameTxt: {fileID: 1387686405}
+  HPTxt: {fileID: 351294684}
+  AttackTxt: {fileID: 1160728057}
+  DefenceTxt: {fileID: 1394372210}
+  panelNo: 4
 --- !u!1 &1584923956
 GameObject:
   m_ObjectHideFlags: 0
@@ -11847,11 +11887,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: Knight
       m_Image: {fileID: 0}
-    - m_Text: Mage
+    - m_Text: Rogue
       m_Image: {fileID: 0}
     - m_Text: Cleric
       m_Image: {fileID: 0}
-    - m_Text: Rogue
+    - m_Text: Mage
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12633,6 +12673,7 @@ GameObject:
   - component: {fileID: 1759584137}
   - component: {fileID: 1759584139}
   - component: {fileID: 1759584138}
+  - component: {fileID: 1759584140}
   m_Layer: 5
   m_Name: CharacterInfoPanel2
   m_TagString: Untagged
@@ -12702,6 +12743,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759584136}
   m_CullTransparentMesh: 0
+--- !u!114 &1759584140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759584136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0dee6ae03ba8142ada100d983b3c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisBattle: {fileID: 1067655597}
+  ClassTxt: {fileID: 1199054896}
+  NameTxt: {fileID: 155714858}
+  HPTxt: {fileID: 2085957720}
+  AttackTxt: {fileID: 1969647530}
+  DefenceTxt: {fileID: 1703571567}
+  panelNo: 2
 --- !u!1 &1762921433
 GameObject:
   m_ObjectHideFlags: 0
@@ -14549,6 +14609,7 @@ GameObject:
   - component: {fileID: 2103495090}
   - component: {fileID: 2103495092}
   - component: {fileID: 2103495091}
+  - component: {fileID: 2103495093}
   m_Layer: 5
   m_Name: CharacterInfoPanel1
   m_TagString: Untagged
@@ -14618,6 +14679,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103495089}
   m_CullTransparentMesh: 0
+--- !u!114 &2103495093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103495089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0dee6ae03ba8142ada100d983b3c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisBattle: {fileID: 1067655597}
+  ClassTxt: {fileID: 1359495661}
+  NameTxt: {fileID: 205123053}
+  HPTxt: {fileID: 1038403230}
+  AttackTxt: {fileID: 61768266}
+  DefenceTxt: {fileID: 937763446}
+  panelNo: 1
 --- !u!1 &2106796047
 GameObject:
   m_ObjectHideFlags: 0
