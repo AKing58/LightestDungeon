@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class MovePlayerCharacterScript : MonoBehaviour
 {
-
-    public string entityPosition;
+    public Entity entity;
 
     public float locPosx;
     public float locPosy;
     public float locPosz;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        entityPosition = "front";
         locPosx = transform.localPosition.x;
         locPosy = transform.localPosition.y;
         locPosz = transform.localPosition.z;
-
     }
 
     // Update is called once per frame
@@ -31,15 +27,15 @@ public class MovePlayerCharacterScript : MonoBehaviour
 
     public void moveCharacter()
     {
-        if(entityPosition == "front")
+        if(entity.CurPosition == Entity.Position.Front)
         {
             transform.localPosition = new Vector3(locPosx, locPosy, locPosz-(float)1.5);
-            entityPosition = "back";
+            entity.CurPosition = Entity.Position.Back;
         }
         else
         {
             transform.localPosition = new Vector3(locPosx, locPosy, locPosz);
-            entityPosition = "front";
+            entity.CurPosition = Entity.Position.Front;
         }
         
     }

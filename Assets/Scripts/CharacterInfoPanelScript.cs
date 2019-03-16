@@ -29,7 +29,7 @@ public class CharacterInfoPanelScript : MonoBehaviour
     {
         if(panelNo < thisBattle.playerList.Count)
         {
-            ClassTxt.text = thisBattle.playerList[panelNo].Classname;
+            ClassTxt.text = thisBattle.playerList[panelNo].ClassType.ToString();
             NameTxt.text = thisBattle.playerList[panelNo].Name;
             HPTxt.text = "HP: " + thisBattle.playerList[panelNo].Health.ToString();
             AttackTxt.text = "Attack: " + thisBattle.playerList[panelNo].Attack.ToString();

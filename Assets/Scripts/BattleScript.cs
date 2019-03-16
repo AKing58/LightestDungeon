@@ -27,7 +27,7 @@ public class BattleScript : MonoBehaviour
     {
         playerList.Add(player);
     }
-    public void addEntity(Entity enemy)
+    public void addEnemy(Entity enemy)
     {
         enemyList.Add(enemy);
     }

@@ -26,9 +26,9 @@ public class RaySelection : MonoBehaviour
                     hit.collider.gameObject.name.Contains("Enemy")
                     )
                 {
-                    InfoDisplay.changeName(hit.collider.gameObject.name);
+                    //InfoDisplay.changeName(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.name.Contains("Enemy")){
-                        InfoDisplay.changeName(hit.collider.gameObject.name);
+                        //InfoDisplay.changeName(hit.collider.gameObject.name);
                     }
                 }
 

@@ -5,24 +5,20 @@ using UnityEngine.UI;
 
 public class InfoDisplay : MonoBehaviour
 {
-    private static string nameString;
-    public Text infoText;
-    public GameObject panel;
     // Start is called before the first frame update
     void Start()
     {
-        nameString = "Unselected";
     }
 
     // Update is called once per frame
     void Update()
     {
-        infoText.text = nameString;
-    }
-
-    public static void changeName(string input)
-    {
-        nameString = input;
     }
     
+    public void displayLocation()
+    {
+        Debug.Log("hello" + GameObject.Find("Players").transform.GetChild(0).transform.localPosition.x + GameObject.Find("Players").transform.GetChild(0).transform.localPosition.y);
+        for(int i = 0; i < GameObject.Find("Players").transform.childCount ; i++)
+            Debug.Log("hello" + GameObject.Find("Players").transform.GetChild(i).transform.name);
+    }
 }

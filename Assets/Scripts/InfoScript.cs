@@ -23,7 +23,7 @@ public class InfoScript : MonoBehaviour
         for(int i = 0; i < thisBattle.playerList.Count; i++)
         {
             info.Append(thisBattle.playerList[i].Name + "\n");
-            info.Append(thisBattle.playerList[i].Classname + "\n");
+            info.Append(thisBattle.playerList[i].ClassType.ToString() + "\n");
             info.Append("HP: " + thisBattle.playerList[i].Health + "\n");
             info.Append("Att: " + thisBattle.playerList[i].Attack + "\n");
             info.Append("Def: " + thisBattle.playerList[i].Defence + "\n");

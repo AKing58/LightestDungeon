@@ -56,16 +56,12 @@
      <Compile Include="Assets\Scripts\BattleScript.cs" />
      <Compile Include="Assets\Scripts\CharacterInfoPanelScript.cs" />
      <Compile Include="Assets\Scripts\Entities\Entity.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player Classes\Cleric.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player Classes\Knight.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player Classes\Mage.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player Classes\Rogue.cs" />
      <Compile Include="Assets\Scripts\Equipment.cs" />
      <Compile Include="Assets\Scripts\InfoDisplay.cs" />
      <Compile Include="Assets\Scripts\InfoScript.cs" />
      <Compile Include="Assets\Scripts\MovePlayerCharacterScript.cs" />
      <Compile Include="Assets\Scripts\RaySelection.cs" />
-     <Compile Include="Assets\Scripts\SetPartyScript.cs" />
+     <Compile Include="Assets\Scripts\SetParty.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Adam/Documents/GitHub/LightestDungeon/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
