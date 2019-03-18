@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterInfoPanelScript : MonoBehaviour
 {
-    public BattleScript thisBattle;
+    public DungeonManager thisDungeon;
     public Text ClassTxt;
     public Text NameTxt;
     public Text HPTxt;
@@ -19,21 +19,21 @@ public class CharacterInfoPanelScript : MonoBehaviour
     {
         //panelNo = (int)System.Char.GetNumericValue(gameObject.name[gameObject.name.Length - 1])-1;
         panelNo--;
-        if (BattleScript.instance == null)
-            Instantiate(thisBattle);
+        if (DungeonManager.instance == null)
+            Instantiate(thisDungeon);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(panelNo < thisBattle.playerList.Count)
+        if(panelNo < thisDungeon.playerList.Count)
         {
-            ClassTxt.text = thisBattle.playerList[panelNo].ClassType.ToString();
-            NameTxt.text = thisBattle.playerList[panelNo].Name;
-            HPTxt.text = "HP: " + thisBattle.playerList[panelNo].Health.ToString();
-            AttackTxt.text = "Attack: " + thisBattle.playerList[panelNo].Attack.ToString();
-            DefenceTxt.text = "Defence: " + thisBattle.playerList[panelNo].Defence.ToString();
+            ClassTxt.text = thisDungeon.playerList[panelNo].ClassType.ToString();
+            NameTxt.text = thisDungeon.playerList[panelNo].Name;
+            HPTxt.text = "HP: " + thisDungeon.playerList[panelNo].Health.ToString();
+            AttackTxt.text = "Attack: " + thisDungeon.playerList[panelNo].Attack.ToString();
+            DefenceTxt.text = "Defence: " + thisDungeon.playerList[panelNo].Defence.ToString();
         }
     }
 }

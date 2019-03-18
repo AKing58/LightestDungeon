@@ -53,13 +53,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BattleScript.cs" />
      <Compile Include="Assets\Scripts\CharacterInfoPanelScript.cs" />
      <Compile Include="Assets\Scripts\Entities\Entity.cs" />
      <Compile Include="Assets\Scripts\Equipment.cs" />
      <Compile Include="Assets\Scripts\InfoDisplay.cs" />
      <Compile Include="Assets\Scripts\InfoScript.cs" />
-     <Compile Include="Assets\Scripts\MovePlayerCharacterScript.cs" />
+     <Compile Include="Assets\Scripts\Managers\BattleManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\DungeonManager.cs" />
      <Compile Include="Assets\Scripts\RaySelection.cs" />
      <Compile Include="Assets\Scripts\SetParty.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">

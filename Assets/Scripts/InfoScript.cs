@@ -8,26 +8,26 @@ public class InfoScript : MonoBehaviour
 {
     public Text infotxt;
     public StringBuilder info;
-    public BattleScript thisBattle;
+    public DungeonManager thisDungeon;
     // Start is called before the first frame update
     void Start()
     {
-        if (BattleScript.instance == null)
-            Instantiate(thisBattle);
+        if (DungeonManager.instance == null)
+            Instantiate(thisDungeon);
     }
 
     // Update is called once per frame
     void Update()
     {
         info = new StringBuilder("Party:\n");
-        for(int i = 0; i < thisBattle.playerList.Count; i++)
+        for(int i = 0; i < thisDungeon.playerList.Count; i++)
         {
-            info.Append(thisBattle.playerList[i].Name + "\n");
-            info.Append(thisBattle.playerList[i].ClassType.ToString() + "\n");
-            info.Append("HP: " + thisBattle.playerList[i].Health + "\n");
-            info.Append("Att: " + thisBattle.playerList[i].Attack + "\n");
-            info.Append("Def: " + thisBattle.playerList[i].Defence + "\n");
-            if (i != thisBattle.playerList.Count - 1)
+            info.Append(thisDungeon.playerList[i].Name + "\n");
+            info.Append(thisDungeon.playerList[i].ClassType.ToString() + "\n");
+            info.Append("HP: " + thisDungeon.playerList[i].Health + "\n");
+            info.Append("Att: " + thisDungeon.playerList[i].Attack + "\n");
+            info.Append("Def: " + thisDungeon.playerList[i].Defence + "\n");
+            if (i != thisDungeon.playerList.Count - 1)
                 info.Append("-------------\n");
         }
         infotxt.text = info.ToString();

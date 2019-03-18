@@ -17,12 +17,12 @@ public class SetParty : MonoBehaviour
 
     public GameObject partyWindow;
 
-    public BattleScript thisBattle;
+    public DungeonManager thisDungeon;
     // Start is called before the first frame update
     void Start()
     {
-        if (BattleScript.instance == null)
-            Instantiate(thisBattle);
+        if (DungeonManager.instance == null)
+            Instantiate(thisDungeon);
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class SetParty : MonoBehaviour
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass1.transform.Find("Label").GetComponent<Text>().text, nameField1.transform.Find("Text").GetComponent<Text>().text);
-        thisBattle.playerList.Add(thisPlayer);
+        thisDungeon.playerList.Add(thisPlayer);
 
         //thisBattle.addPlayer(parseClassType(dropdownClass2.transform.Find("Label").GetComponent<Text>().text, nameField2.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass2.transform.Find("Label").GetComponent<Text>().text) as GameObject;
@@ -53,7 +53,7 @@ public class SetParty : MonoBehaviour
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass2.transform.Find("Label").GetComponent<Text>().text, nameField2.transform.Find("Text").GetComponent<Text>().text);
-        thisBattle.playerList.Add(thisPlayer);
+        thisDungeon.playerList.Add(thisPlayer);
 
         //thisBattle.addPlayer(parseClassType(dropdownClass3.transform.Find("Label").GetComponent<Text>().text, nameField3.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass3.transform.Find("Label").GetComponent<Text>().text) as GameObject;
@@ -61,7 +61,7 @@ public class SetParty : MonoBehaviour
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass3.transform.Find("Label").GetComponent<Text>().text, nameField3.transform.Find("Text").GetComponent<Text>().text);
-        thisBattle.playerList.Add(thisPlayer);
+        thisDungeon.playerList.Add(thisPlayer);
 
         //thisBattle.addPlayer(parseClassType(dropdownClass4.transform.Find("Label").GetComponent<Text>().text, nameField4.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass4.transform.Find("Label").GetComponent<Text>().text) as GameObject;
@@ -69,8 +69,25 @@ public class SetParty : MonoBehaviour
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass4.transform.Find("Label").GetComponent<Text>().text, nameField4.transform.Find("Text").GetComponent<Text>().text);
-        thisBattle.playerList.Add(thisPlayer);
-        
+        thisDungeon.playerList.Add(thisPlayer);
+
+        attachMovement();
         partyWindow.SetActive(false);
+    }
+
+    
+
+
+
+    public void attachMovement()
+    {
+        GameObject movementButton;
+        Button moveBtn;
+        for (int i=0; i <thisDungeon.playerList.Count; i++)
+        {
+            movementButton = GameObject.Find("UI/LeftPanel/CharacterInfoPanel" + (i + 1) + "/SkillPanel/SkillBtn6");
+            moveBtn = movementButton.GetComponent<Button>();
+            moveBtn.onClick.AddListener(thisDungeon.playerList[i].switchPosition);
+        }
     }
 }
