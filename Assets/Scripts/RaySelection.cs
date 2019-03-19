@@ -5,12 +5,12 @@ using UnityEngine;
 public class RaySelection : MonoBehaviour
 {
     Camera cam;
-    public DungeonManager thisDungeon;
+    //public DungeonManager thisDungeon;
     // Start is called before the first frame update
     void Start()
     {
         cam = GetComponent<Camera>();
-        thisDungeon = DungeonManager.instance;
+        //thisDungeon = DungeonManager.instance;
     }
 
     // Update is called once per frame

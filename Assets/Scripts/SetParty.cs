@@ -41,7 +41,7 @@ public class SetParty : MonoBehaviour
 
         //thisBattle.addPlayer(parseClassType(dropdownClass1.transform.Find("Label").GetComponent<Text>().text, nameField1.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass1.transform.Find("Label").GetComponent<Text>().text) as GameObject;
-        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(-4.5F, 0, 0), Quaternion.identity);
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[0], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass1.transform.Find("Label").GetComponent<Text>().text, nameField1.transform.Find("Text").GetComponent<Text>().text);
@@ -49,7 +49,7 @@ public class SetParty : MonoBehaviour
 
         //thisBattle.addPlayer(parseClassType(dropdownClass2.transform.Find("Label").GetComponent<Text>().text, nameField2.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass2.transform.Find("Label").GetComponent<Text>().text) as GameObject;
-        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(-1.5F, 0, 0), Quaternion.identity);
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[1], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass2.transform.Find("Label").GetComponent<Text>().text, nameField2.transform.Find("Text").GetComponent<Text>().text);
@@ -57,7 +57,7 @@ public class SetParty : MonoBehaviour
 
         //thisBattle.addPlayer(parseClassType(dropdownClass3.transform.Find("Label").GetComponent<Text>().text, nameField3.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass3.transform.Find("Label").GetComponent<Text>().text) as GameObject;
-        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(1.5F, 0, 0), Quaternion.identity);
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[2], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass3.transform.Find("Label").GetComponent<Text>().text, nameField3.transform.Find("Text").GetComponent<Text>().text);
@@ -65,11 +65,12 @@ public class SetParty : MonoBehaviour
 
         //thisBattle.addPlayer(parseClassType(dropdownClass4.transform.Find("Label").GetComponent<Text>().text, nameField4.transform.Find("Text").GetComponent<Text>().text));
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass4.transform.Find("Label").GetComponent<Text>().text) as GameObject;
-        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(4.5F, 0, 0), Quaternion.identity);
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[3], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
         thisPlayer = playerObject.GetComponent<Entity>();
         thisPlayer.parseClassName(dropdownClass4.transform.Find("Label").GetComponent<Text>().text, nameField4.transform.Find("Text").GetComponent<Text>().text);
         thisDungeon.playerList.Add(thisPlayer);
+        
 
         attachMovement();
         partyWindow.SetActive(false);

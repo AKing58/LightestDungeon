@@ -12,7 +12,7 @@ public class InfoScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (DungeonManager.instance == null)
+        if (DungeonManager.instance == null) { }
             Instantiate(thisDungeon);
     }
 
