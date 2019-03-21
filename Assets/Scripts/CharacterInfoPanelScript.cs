@@ -11,7 +11,6 @@ public class CharacterInfoPanelScript : MonoBehaviour
     public Text HPTxt;
     public Text AttackTxt;
     public Text DefenceTxt;
-    public GameObject SkillPanel;
 
     public int panelNo;
     
@@ -22,7 +21,7 @@ public class CharacterInfoPanelScript : MonoBehaviour
         panelNo--;
         if (DungeonManager.instance == null)
             Instantiate(thisDungeon);
-        SkillPanel = transform.Find("SkillPanel").gameObject;
+        
     }
 
     // Update is called once per frame
@@ -35,16 +34,6 @@ public class CharacterInfoPanelScript : MonoBehaviour
             HPTxt.text = "HP: " + thisDungeon.playerList[panelNo].Health.ToString();
             AttackTxt.text = "Attack: " + thisDungeon.playerList[panelNo].Attack.ToString();
             DefenceTxt.text = "Defence: " + thisDungeon.playerList[panelNo].Defence.ToString();
-            if (thisDungeon.playerList[panelNo].isTurn)
-            {
-                SkillPanel.SetActive(true);
-            }
-            else
-            {
-                SkillPanel.SetActive(false);
-            }
         }
-
-        
     }
 }
