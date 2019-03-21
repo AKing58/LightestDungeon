@@ -40,8 +40,8 @@ public class BattleManager : MonoBehaviour
 
         for (int i = 1; i < enemyList.Count + 1; i++)
         {
-            EnemyInfoPanel thing = GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + i).GetComponent<EnemyInfoPanel>();
-            thing.thisBattle = this;
+            EnemyInfoPanel enemyInfo = GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + i).GetComponent<EnemyInfoPanel>();
+            enemyInfo.thisBattle = this;
         }
     }
 }
