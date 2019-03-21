@@ -1,5 +1,6 @@
+/*
+/*/
 
-Library/assetDatabase3
-*.dwlt
-Library/shadercompiler-UnityShaderCompiler.exe0.log
-Library/StateCache/SceneView/84ea5f-mainStage.json
+!.gitignore
+!/Assets/
+!/ProjectSettings/

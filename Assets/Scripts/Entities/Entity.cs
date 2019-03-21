@@ -15,14 +15,17 @@ public class Entity : MonoBehaviour {
     public int Health { get; set; }
     public int Attack { get; set; }
     public int Defence { get; set; }
+    public int Speed { get; set; }
+    
     public Position CurPosition { get; set; }
+    public bool isTurn { get; set; }
     public Equipment[] Loadout { get; set; }
 
     public float locPosx;
     public float locPosy;
     public float locPosz;
 
-    public void createEntity(string name, int lv, int hp, int att, int def)
+    public void createEntity(string name, int lv, int hp, int att, int def, int speed)
     {
         Name = name;
         Level = lv;
@@ -34,43 +37,8 @@ public class Entity : MonoBehaviour {
         locPosy = transform.localPosition.y;
         locPosz = transform.localPosition.z;
     }
-    /**
-     * Friendlies
-     */
-    public void initKnight(string name)
-    {
-        createEntity(name, 1, 10, 10, 10);
-        ClassType = Vocation.Knight;
-        Friendly = true;
-    }
-    public void initRogue(string name)
-    {
-        createEntity(name, 1, 8, 14, 8);
-        ClassType = Vocation.Rogue;
-        Friendly = true;
-    }
-    public void initCleric(string name)
-    {
-        createEntity(name, 1, 10, 8, 14);
-        ClassType = Vocation.Cleric;
-        Friendly = true;
-    }
-    public void initMage(string name)
-    {
-        createEntity(name, 1, 10, 12, 8);
-        ClassType = Vocation.Mage;
-        Friendly = true;
-    }
 
-    /**
-     * Enemies
-     */
-    public void initOrc(string name)
-    {
-        createEntity(name, 1, 8, 8, 8);
-        ClassType = Vocation.Orc;
-        Friendly = false;
-    }
+    public virtual void init(string name) { }
 
     public void switchPosition()
     {
@@ -94,29 +62,11 @@ public class Entity : MonoBehaviour {
         }
     }
 
-    public void parseClassName(string className, string name)
+    
+
+    public void doTurn()
     {
-        switch (className)
-        {
-            case "Knight":
-                initKnight(name);
-                break;
-            case "Rogue":
-                initRogue(name);
-                break;
-            case "Cleric":
-                initCleric(name);
-                break;
-            case "Mage":
-                initMage(name);
-                break;
-            case "Orc":
-                initOrc("Orc");
-                break;
-            default:
-                initKnight(name);
-                break;
-        }
+        
     }
 }
 
