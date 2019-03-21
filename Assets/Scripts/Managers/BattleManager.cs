@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    public BattleManager instance;
+    public static BattleManager instance = null;
     public List<Entity> enemyList;
     public DungeonManager thisDungeon;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -37,6 +37,11 @@ public class BattleManager : MonoBehaviour
             thisEnemy.parseClassName("Orc", "Orc");
             enemyList.Add(thisEnemy);
         }
-        
+
+        for (int i = 1; i < enemyList.Count + 1; i++)
+        {
+            EnemyInfoPanel thing = GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + i).GetComponent<EnemyInfoPanel>();
+            thing.thisBattle = this;
+        }
     }
 }

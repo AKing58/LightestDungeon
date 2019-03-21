@@ -110,6 +110,9 @@ public class Entity : MonoBehaviour {
             case "Mage":
                 initMage(name);
                 break;
+            case "Orc":
+                initOrc("Orc");
+                break;
             default:
                 initKnight(name);
                 break;
