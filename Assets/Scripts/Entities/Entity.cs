@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
-public class Entity : MonoBehaviour {
+public class Entity : MonoBehaviour{
     public enum Vocation { Knight, Rogue, Cleric, Mage, Orc };
     public enum Position { Front, Back };
     //public string Classname { get; set; }
@@ -24,6 +25,8 @@ public class Entity : MonoBehaviour {
     public float locPosx;
     public float locPosy;
     public float locPosz;
+
+    public GameObject myPanel;
 
     public void createEntity(string name, int lv, int hp, int att, int def, int speed)
     {
@@ -66,7 +69,24 @@ public class Entity : MonoBehaviour {
 
     public void doTurn()
     {
+        if(Friendly)
+            myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
         
+    }
+    
+    void OnMouseOver()
+    {
+        Debug.Log("enter");
+        transform.Find("SelectionUI").gameObject.SetActive(true);
+    }
+    void OnMouseExit() 
+    {
+        Debug.Log("exit");
+        transform.Find("SelectionUI").gameObject.SetActive(false);
     }
 }
 

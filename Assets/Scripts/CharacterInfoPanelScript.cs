@@ -35,14 +35,7 @@ public class CharacterInfoPanelScript : MonoBehaviour
             HPTxt.text = "HP: " + thisDungeon.playerList[panelNo].Health.ToString();
             AttackTxt.text = "Attack: " + thisDungeon.playerList[panelNo].Attack.ToString();
             DefenceTxt.text = "Defence: " + thisDungeon.playerList[panelNo].Defence.ToString();
-            if (thisDungeon.playerList[panelNo].isTurn)
-            {
-                SkillPanel.SetActive(true);
-            }
-            else
-            {
-                SkillPanel.SetActive(false);
-            }
+            thisDungeon.playerList[panelNo].myPanel = this.gameObject; 
         }
 
         
