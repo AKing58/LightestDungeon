@@ -48,7 +48,7 @@ public class Entity : MonoBehaviour{
         locPosz = transform.localPosition.z;
     }
 
-    //To be overrided by derived classes
+    //To be overrided by derived classes for initialization of a derived entity
     public virtual void init(string name) { }
 
     //Moves positions
@@ -73,41 +73,42 @@ public class Entity : MonoBehaviour{
             CurPosition = Entity.Position.Front;
         }
     }
-    
+    //On mouse over event used to activate the selection UI
     void OnMouseOver()
     {
         transform.Find("SelectionUI").gameObject.SetActive(true);
     }
+    //On mouse exit event used to deactivate the selection UI
     void OnMouseExit() 
     {
         transform.Find("SelectionUI").gameObject.SetActive(false);
     }
-
+    //First move for derived entities to override
     public virtual void move1(Entity target)
     {
         Debug.Log("Move1");
     }
-
+    //Second move for derived entities to override
     public virtual void move2(Entity target)
     {
         Debug.Log("Move2");
     }
-
+    //Third move for derived entities to override
     public virtual void move3(Entity target)
     {
         Debug.Log("Move3");
     }
-
+    //Fourth move for derived entities to override
     public virtual void move4(Entity target)
     {
         Debug.Log("Move4");
     }
-
+    //Fifth move for derived entities to override
     public virtual void move5(Entity target)
     {
         Debug.Log("Move5");
     }
-
+    //Determines this entity's currently selected skill and performs it on the entity selected
     public void doMove(Entity target)
     {
         switch (myPanel.GetComponent<CharacterInfoPanelScript>().selectedSkill)
@@ -134,6 +135,7 @@ public class Entity : MonoBehaviour{
         }
         didMove();
     }
+    //Once the Entity performs the move on a target, moves on to the next turn
     public void didMove()
     {
         GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();

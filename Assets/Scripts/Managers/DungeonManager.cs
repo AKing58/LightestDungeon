@@ -23,12 +23,6 @@ public class DungeonManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
     /// Starts the battle through the battle manager class
     /// </summary>
