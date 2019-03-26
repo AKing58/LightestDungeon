@@ -45,12 +45,20 @@ public class CharacterInfoPanelScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method to change what skill is being selected
+    /// </summary>
+    /// <param name="newSkill"></param>
     public void changeSelectedSkill(int newSkill)
     {
         selectedSkill = (SelectedSkill)newSkill;
         Debug.Log("Selected skill: " + newSkill);
     }
 
+    /// <summary>
+    /// Method to set the game object panel to active
+    /// </summary>
+    /// <param name="state"></param>
     public void setThisPanel(bool state)
     {
         this.gameObject.SetActive(state);

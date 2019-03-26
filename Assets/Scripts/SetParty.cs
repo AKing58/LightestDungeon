@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class that sets the player party after inputting the values into the info fields
+/// Created by: Adam
+/// </summary>
 public class SetParty : MonoBehaviour
 {
     public GameObject nameField1;
@@ -39,7 +43,7 @@ public class SetParty : MonoBehaviour
         GameObject parent = GameObject.Find("Players");
         Entity thisPlayer;
 
-        //thisBattle.addPlayer(parseClassType(dropdownClass1.transform.Find("Label").GetComponent<Text>().text, nameField1.transform.Find("Text").GetComponent<Text>().text));
+        // Creates the first player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass1.transform.Find("Label").GetComponent<Text>().text) as GameObject;
         playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[0], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
@@ -47,7 +51,7 @@ public class SetParty : MonoBehaviour
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
 
-        //thisBattle.addPlayer(parseClassType(dropdownClass2.transform.Find("Label").GetComponent<Text>().text, nameField2.transform.Find("Text").GetComponent<Text>().text));
+        // Creates the second player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass2.transform.Find("Label").GetComponent<Text>().text) as GameObject;
         playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[1], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
@@ -55,7 +59,7 @@ public class SetParty : MonoBehaviour
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
 
-        //thisBattle.addPlayer(parseClassType(dropdownClass3.transform.Find("Label").GetComponent<Text>().text, nameField3.transform.Find("Text").GetComponent<Text>().text));
+        // Creates the third player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass3.transform.Find("Label").GetComponent<Text>().text) as GameObject;
         playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[2], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
@@ -63,7 +67,7 @@ public class SetParty : MonoBehaviour
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
 
-        //thisBattle.addPlayer(parseClassType(dropdownClass4.transform.Find("Label").GetComponent<Text>().text, nameField4.transform.Find("Text").GetComponent<Text>().text));
+        // Creates the fourth player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass4.transform.Find("Label").GetComponent<Text>().text) as GameObject;
         playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[3], 0, 0), Quaternion.identity);
         playerObject.transform.parent = parent.transform;
@@ -76,6 +80,12 @@ public class SetParty : MonoBehaviour
         partyWindow.SetActive(false);
     }
 
+    /// <summary>
+    /// Creates a class component depending on the class name input
+    /// </summary>
+    /// <param name="g"></param>
+    /// <param name="className"></param>
+    /// <param name="name"></param>
     public void parseClassName(GameObject g, string className, string name)
     {
         if(className == "Knight")
@@ -106,8 +116,9 @@ public class SetParty : MonoBehaviour
         
     }
 
-
-
+    /// <summary>
+    /// Method that creates the movement button on the UI
+    /// </summary>
     public void attachMovement()
     {
         GameObject movementButton;

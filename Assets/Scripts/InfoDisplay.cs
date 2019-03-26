@@ -15,6 +15,10 @@ public class InfoDisplay : MonoBehaviour
     {
     }
     
+    /// <summary>
+    /// Displays the location of the game object
+    /// Currently used for debugging purposes
+    /// </summary>
     public void displayLocation()
     {
         Debug.Log("hello" + GameObject.Find("Players").transform.GetChild(0).transform.localPosition.x + GameObject.Find("Players").transform.GetChild(0).transform.localPosition.y);

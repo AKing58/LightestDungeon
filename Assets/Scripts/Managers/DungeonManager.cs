@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Dungeon manager class that will handle all the different aspects of the dungeon such as initiating battles and events
+/// </summary>
 public class DungeonManager : MonoBehaviour
 {
 
@@ -9,6 +12,7 @@ public class DungeonManager : MonoBehaviour
     public static DungeonManager instance = null;
     public List<Entity> playerList;
     public BattleManager curBattle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +29,9 @@ public class DungeonManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Starts the battle through the battle manager class
+    /// </summary>
     public void startBattle()
     {
         if(curBattle == null)
@@ -36,6 +43,9 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the next turn of the current battle
+    /// </summary>
     public void doNextTurn()
     {
         curBattle.currentTurn();

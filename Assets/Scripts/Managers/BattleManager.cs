@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class that controls the game logic for when battles are initiated in the game
+/// </summary>
 public class BattleManager : MonoBehaviour
 {
     public BattleManager instance;
@@ -22,6 +25,10 @@ public class BattleManager : MonoBehaviour
         
     }
     
+    /// <summary>
+    /// Method to start the battle sequence
+    /// Loads the enemy prefabs and game objects
+    /// </summary>
     public void initBattle()
     {
         thisDungeon = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
@@ -49,6 +56,12 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds enemy components dependant on the class name variable
+    /// </summary>
+    /// <param name="g"></param>
+    /// <param name="className"></param>
+    /// <param name="name"></param>
     public void parseClassName(GameObject g, string className, string name)
     {
         if (className == "Orc")
@@ -64,6 +77,9 @@ public class BattleManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Method that starts the turn order for players and enemies
+    /// </summary>
     public void initTurnOrder()
     {
         turnOrder = new List<Entity>();
@@ -81,6 +97,9 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that keeps track of the current turn during a battle
+    /// </summary>
     public void currentTurn()
     {
         if (turnNo == 0)
@@ -93,6 +112,10 @@ public class BattleManager : MonoBehaviour
             turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
         }
     }
+
+    /// <summary>
+    /// Method that causes the next turn to start
+    /// </summary>
     public void nextTurn()
     {
         if (turnOrder[turnNo].Friendly)

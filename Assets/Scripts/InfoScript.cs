@@ -19,6 +19,7 @@ public class InfoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Sets the text information of each player character
         info = new StringBuilder("Party:\n");
         for(int i = 0; i < thisDungeon.playerList.Count; i++)
         {
