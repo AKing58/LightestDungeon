@@ -20,11 +20,16 @@ public class RaySelection : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (Input.GetMouseButtonDown(0))
+
+            //GameObject g= hit.collider.gameObject;
+            if (Input.GetMouseButtonDown(0) && !hit.collider.name.ToLower().Contains("ground"))
             {
-                //hit.collider.gameObject.transform.Find("SelectionUI").gameObject;
+                if (GameObject.Find("DungeonManager").GetComponent<BattleManager>()!= null)
+                {
+                    BattleManager tempBattle = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
+                    tempBattle.turnOrder[tempBattle.turnNo-1].doMove(hit.collider.gameObject.GetComponent<Entity>());
+                }
             }
-            
         }
         
     }

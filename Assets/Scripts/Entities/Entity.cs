@@ -64,29 +64,71 @@ public class Entity : MonoBehaviour{
             CurPosition = Entity.Position.Front;
         }
     }
-
     
-
     public void doTurn()
     {
         if(Friendly)
             myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
     }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        
-    }
     
     void OnMouseOver()
     {
-        Debug.Log("enter");
         transform.Find("SelectionUI").gameObject.SetActive(true);
     }
     void OnMouseExit() 
     {
-        Debug.Log("exit");
         transform.Find("SelectionUI").gameObject.SetActive(false);
+    }
+
+    public virtual void move1(Entity target)
+    {
+        Debug.Log("Move1");
+    }
+
+    public virtual void move2(Entity target)
+    {
+        Debug.Log("Move2");
+    }
+
+    public virtual void move3(Entity target)
+    {
+        Debug.Log("Move3");
+    }
+
+    public virtual void move4(Entity target)
+    {
+        Debug.Log("Move4");
+    }
+
+    public virtual void move5(Entity target)
+    {
+        Debug.Log("Move5");
+    }
+
+    public void doMove(Entity target)
+    {
+        switch (myPanel.GetComponent<CharacterInfoPanelScript>().selectedSkill)
+        {
+            case CharacterInfoPanelScript.SelectedSkill.MOVE1:
+                move1(target);
+                break;
+            case CharacterInfoPanelScript.SelectedSkill.MOVE2:
+                move2(target);
+                break;
+            case CharacterInfoPanelScript.SelectedSkill.MOVE3:
+                move3(target);
+                break;
+            case CharacterInfoPanelScript.SelectedSkill.MOVE4:
+                move4(target);
+                break;
+            case CharacterInfoPanelScript.SelectedSkill.MOVE5:
+                move5(target);
+                break;
+            default:
+                move1(target);
+                Debug.Log("Defaulted");
+                break;
+        }
     }
 }
 
