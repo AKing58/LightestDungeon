@@ -5,29 +5,36 @@ using UnityEngine.EventSystems;
 
 
 public class Entity : MonoBehaviour{
+    //Custom Enums
     public enum Vocation { Knight, Rogue, Cleric, Mage, Orc };
     public enum Position { Front, Back };
-    //public string Classname { get; set; }
 
     public bool Friendly { get; set; }
     public Vocation ClassType { get; set; }
     public string Name { get; set; }
+
+    //Stats
     public int Level { get; set; }
     public int Health { get; set; }
     public int Attack { get; set; }
     public int Defence { get; set; }
     public int Speed { get; set; }
     
+
     public Position CurPosition { get; set; }
     public bool isTurn { get; set; }
+
     public Equipment[] Loadout { get; set; }
 
+    //Physical location
     public float locPosx;
     public float locPosy;
     public float locPosz;
 
+    //Used to access this character's info panel
     public GameObject myPanel;
 
+    //Basically a constructor
     public void createEntity(string name, int lv, int hp, int att, int def, int speed)
     {
         Name = name;
@@ -41,8 +48,10 @@ public class Entity : MonoBehaviour{
         locPosz = transform.localPosition.z;
     }
 
+    //To be overrided by derived classes
     public virtual void init(string name) { }
 
+    //Moves positions
     public void switchPosition()
     {
         float movementAmount;
@@ -63,12 +72,6 @@ public class Entity : MonoBehaviour{
             transform.localPosition = new Vector3(locPosx, locPosy, locPosz);
             CurPosition = Entity.Position.Front;
         }
-    }
-    
-    public void doTurn()
-    {
-        if(Friendly)
-            myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
     }
     
     void OnMouseOver()
