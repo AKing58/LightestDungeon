@@ -31,6 +31,7 @@ public class DungeonManager : MonoBehaviour
         {
             curBattle = gameObject.AddComponent<BattleManager>() as BattleManager;
             curBattle.initBattle();
+            curBattle.currentTurn();
             Debug.Log("created");
         }
     }

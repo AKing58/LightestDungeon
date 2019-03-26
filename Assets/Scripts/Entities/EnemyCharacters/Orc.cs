@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Orc : Entity
 {
-    public void init(string name)
+    public override void init(string name)
     {
         createEntity(name, 1, 8, 8, 8, 10);
         ClassType = Vocation.Orc;

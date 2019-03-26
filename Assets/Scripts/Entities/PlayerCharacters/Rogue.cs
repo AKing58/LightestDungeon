@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rogue : Entity
 {
-    public void init(string name)
+    public override void init(string name)
     {
         createEntity(name, 1, 8, 14, 8, 12);
         ClassType = Vocation.Rogue;
