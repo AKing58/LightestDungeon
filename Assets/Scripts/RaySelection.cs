@@ -27,7 +27,7 @@ public class RaySelection : MonoBehaviour
                 if (GameObject.Find("DungeonManager").GetComponent<BattleManager>()!= null)
                 {
                     BattleManager tempBattle = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
-                    tempBattle.turnOrder[tempBattle.turnNo-1].doMove(hit.collider.gameObject.GetComponent<Entity>());
+                    tempBattle.turnOrder[tempBattle.turnNo].doMove(hit.collider.gameObject.GetComponent<Entity>());
                 }
             }
         }

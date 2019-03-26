@@ -92,12 +92,17 @@ public class BattleManager : MonoBehaviour
         {
             turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
         }
-        nextTurn();
     }
     public void nextTurn()
     {
-        Debug.Log(turnOrder[turnNo++].Name);
+        if (turnOrder[turnNo].Friendly)
+        {
+            turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
+        }
+        turnNo++;
+        //Debug.Log(turnOrder[turnNo++].Name);
         if (turnNo > turnOrder.Count - 1)
             turnNo = 0;
+        currentTurn();
     }
 }

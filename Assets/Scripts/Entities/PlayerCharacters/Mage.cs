@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mage : Entity
 {
-    public void init(string name)
+    public override void init(string name)
     {
         createEntity(name, 1, 10, 12, 8, 10);
         ClassType = Vocation.Mage;

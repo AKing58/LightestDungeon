@@ -129,6 +129,11 @@ public class Entity : MonoBehaviour{
                 Debug.Log("Defaulted");
                 break;
         }
+        didMove();
+    }
+    public void didMove()
+    {
+        GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();
     }
 }
 
