@@ -10,4 +10,29 @@ public class Mage : Entity
         ClassType = Vocation.Mage;
         Friendly = true;
     }
+
+    public override void move1(Entity target)
+    {
+        Debug.Log("Mage Move1 on " + target.Name);
+    }
+
+    public override void move2(Entity target)
+    {
+        Debug.Log("Mage Move2 on " + target.Name);
+    }
+
+    public override void move3(Entity target)
+    {
+        Debug.Log("Mage Move3 on " + target.Name);
+    }
+
+    public override void move4(Entity target)
+    {
+        Debug.Log("Mage Move4 on " + target.Name);
+    }
+
+    public override void move5(Entity target)
+    {
+        Debug.Log("Mage Move5 on " + target.Name);
+    }
 }
