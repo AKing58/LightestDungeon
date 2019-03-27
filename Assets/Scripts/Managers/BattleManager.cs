@@ -54,6 +54,7 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log(i + " " + turnOrder[i].Name + " " + turnOrder[i].ClassType);
         }
+        updateEnemies();
     }
 
     /// <summary>
@@ -127,5 +128,13 @@ public class BattleManager : MonoBehaviour
         if (turnNo > turnOrder.Count - 1)
             turnNo = 0;
         currentTurn();
+    }
+
+    public void updateEnemies()
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            enemyList[i].myPanel.transform.Find("EnemyInfoPanel" + (i + 1)).gameObject.SetActive(true);
+        }
     }
 }
