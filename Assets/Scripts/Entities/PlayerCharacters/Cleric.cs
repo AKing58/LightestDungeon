@@ -7,7 +7,7 @@ public class Cleric : Entity
     //Initializes the Cleric Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 10, 8, 14, 8);
+        createEntity(name, 1, 10, 8, new int[] { 2, 6 }, 14, 8);
         ClassType = Vocation.Cleric;
         Friendly = true;
     }

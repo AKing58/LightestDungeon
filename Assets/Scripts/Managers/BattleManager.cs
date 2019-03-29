@@ -13,17 +13,6 @@ public class BattleManager : MonoBehaviour
     public DungeonManager thisDungeon;
     public List<Entity> turnOrder;
     public int turnNo;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     /// <summary>
     /// Method to start the battle sequence
@@ -125,6 +114,8 @@ public class BattleManager : MonoBehaviour
         turnNo++;
         //Debug.Log(turnOrder[turnNo++].Name);
         if (turnNo > turnOrder.Count - 1)
+            turnNo = 0;
+        if (!turnOrder[turnNo].Friendly)
             turnNo = 0;
         currentTurn();
     }

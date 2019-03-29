@@ -7,7 +7,7 @@ public class Rogue : Entity
     //Initializes the Rogue Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 8, 14, 8, 12);
+        createEntity(name, 1, 8, 14, new int[] { 2, 12 }, 8, 12);
         ClassType = Vocation.Rogue;
         Friendly = true;
     }

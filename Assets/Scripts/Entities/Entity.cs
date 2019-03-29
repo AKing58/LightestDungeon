@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 
+
 public class Entity : MonoBehaviour{
+    System.Random r;
     //Custom Enums
     public enum Vocation { Knight, Rogue, Cleric, Mage, Orc };
     public enum Position { Front, Back };
@@ -17,14 +20,22 @@ public class Entity : MonoBehaviour{
     public int Level { get; set; }
     public int Health { get; set; }
     public int Attack { get; set; }
+    public int[] Damage { get; set; }
     public int Defence { get; set; }
     public int Speed { get; set; }
-    
+
+    //Status
+    public Dictionary<string, int> StatusEffects;
+
+    //Bonuses
+    private int AttBonus { get; set; }
+    private int DamBonus { get; set; }
+    public Equipment[] Loadout { get; set; }
 
     public Position CurPosition { get; set; }
     public bool isTurn { get; set; }
 
-    public Equipment[] Loadout { get; set; }
+    
 
     //Physical location
     public float locPosx;
@@ -35,13 +46,17 @@ public class Entity : MonoBehaviour{
     public GameObject myPanel;
 
     //Basically a constructor
-    public void createEntity(string name, int lv, int hp, int att, int def, int speed)
+    public void createEntity(string name, int lv, int hp, int att, int[] dam,int def, int speed)
     {
         Name = name;
         Level = lv;
         Health = hp;
         Attack = att;
         Defence = def;
+        Damage = dam;
+
+        StatusEffects = new Dictionary<string, int>();
+
         CurPosition = Position.Front;
         locPosx = transform.localPosition.x;
         locPosy = transform.localPosition.y;
@@ -135,35 +150,30 @@ public class Entity : MonoBehaviour{
         }
         didMove();
     }
+
+    public int rollDice(int min, int max)
+    {
+        r = new System.Random();
+        return r.Next(min, max);
+    }
+
     //Once the Entity performs the move on a target, moves on to the next turn
     public void didMove()
     {
         GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();
     }
-}
-
-/*
-[System.Serializable]
-public class Entity
-{
-    public string Classname { get; set; }
-    public string Name { get; set; }
-    public int Level { get; set; }
-    public int Health { get; set; }
-    public int Attack { get; set; }
-    public int Defence { get; set; }
-    public string Position { get; set; }
-    public Equipment[] Loadout { get; set; }
-
-    public Entity(string name, int lv, int hp, int att, int def)
+    public struct Move
     {
-        Name = name;
-        Level = lv;
-        Health = hp;
-        Attack = att;
-        Defence = def;
-        Position = "Front";
+        public string Name;
+        public int Att;
+        public int Dam;
+        public int Def;
+        public Move(string name, int att, int def, int dam)
+        {
+            Name = name;
+            Att = att;
+            Dam = dam;
+            Def = def;
+        }
     }
-
 }
-*/
