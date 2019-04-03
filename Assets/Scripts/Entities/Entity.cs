@@ -19,12 +19,31 @@ public class Entity : MonoBehaviour{
     //Stats
     public int Level { get; set; }
     public int Health { get; set; }
-    public int Attack { get; set; }
-    public int[] Damage { get; set; }
-    public int Defence { get; set; }
-    public int Speed { get; set; }
+    public int Attack {
+        get { return Attack + StatusEffects["AttBuff"]; }
+        set { Attack = value; }
+    }
+    public int[] Damage
+    {
+        get {
+            int[] tempDam = Damage;
+            for(int i=0; i<2; i++)
+                tempDam[i]++;
+            return tempDam; }
+        set { Damage = value; }
+    }
+    public int Defence
+    {
+        get { return Defence + StatusEffects["AttBuff"]; }
+        set { Defence = value; }
+    }
+public int Speed { get; set; }
 
     //Status
+    /// <summary>
+    /// DefBuff
+    /// AttBuff
+    /// </summary>
     public Dictionary<string, int> StatusEffects;
 
     //Bonuses

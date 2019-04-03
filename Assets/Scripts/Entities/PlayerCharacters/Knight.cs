@@ -37,7 +37,8 @@ public class Knight : Entity
     }
     /// <summary>
     /// Shoulder Bash
-    /// Att: -2
+    /// -------50% Stun chance
+    /// Att: 0
     /// Dam: -3
     /// Target: Single
     /// Status: Stun
@@ -47,14 +48,15 @@ public class Knight : Entity
     {
         string moveName = "Shoulder Bash";
         int tempDef = rollDice(1, target.Defence);
-        int tempAtt = rollDice(1, Attack) - 2;
+        int tempAtt = rollDice(1, Attack);
         int tempDam;
         Debug.Log("Att: " + tempAtt + " vs Def: " + tempDef);
         if (tempAtt > tempDef)
         {
             tempDam = rollDice(Damage[0], Damage[1]) - 3;
             Debug.Log(Name  + ": " + moveName + " on " + target.Name + " for " + tempDam);
-            target.StatusEffects["Stun"] += 1;
+            if(rollDice(0,1) == 1)
+                target.StatusEffects["Stun"] += 1;
             target.Health -= tempDam;
         }
         else
@@ -64,7 +66,7 @@ public class Knight : Entity
         
     }
     /// <summary>
-    /// Cleave
+    /// Cleave --------------NEEDS IMPLEMENTATION-----
     /// Att: -1
     /// Dam: -2
     /// Target: Single
@@ -103,6 +105,7 @@ public class Knight : Entity
         target.StatusEffects["DefBuff"] += 5;
         Debug.Log(moveName + " on " + target.Name);
     }
+
     /// <summary>
     /// 
     /// Att: NA
