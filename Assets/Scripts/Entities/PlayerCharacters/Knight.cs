@@ -26,7 +26,6 @@ public class Knight : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            move.Dam = rollDice(Damage[0], Damage[1]);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -46,22 +45,18 @@ public class Knight : Entity
     /// <param name="target"></param>
     public override void move2(Entity target)
     {
-        string moveName = "Shoulder Bash";
-        int tempDef = rollDice(1, target.Defence);
-        int tempAtt = rollDice(1, Attack);
-        int tempDam;
-        Debug.Log("Att: " + tempAtt + " vs Def: " + tempDef);
-        if (tempAtt > tempDef)
+        Move move = new Move("Shoulder Bash", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) - 3);
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+        if (move.Att > move.Def)
         {
-            tempDam = rollDice(Damage[0], Damage[1]) - 3;
-            Debug.Log(Name  + ": " + moveName + " on " + target.Name + " for " + tempDam);
-            if(rollDice(0,1) == 1)
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
+            if (rollDice(0,1) == 1)
                 target.StatusEffects["Stun"] += 1;
-            target.Health -= tempDam;
+            target.Health -= move.Dam;
         }
         else
         {
-            Debug.Log(Name + ": " + moveName + " on " + target.Name + " missed!");
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " missed!");
         }
         
     }
@@ -69,27 +64,56 @@ public class Knight : Entity
     /// Cleave --------------NEEDS IMPLEMENTATION-----
     /// Att: -1
     /// Dam: -2
-    /// Target: Single
+    /// Target: Group
     /// Status: None
     /// </summary>
     /// <param name="target"></param>
     public override void move3(Entity target)
     {
-        string moveName = "Cleave";
-        int tempDef = rollDice(1, target.Defence);
-        int tempAtt = rollDice(1, Attack) - 1;
-        int tempDam;
-        Debug.Log("Att: " + tempAtt + " vs Def: " + tempDef);
-        if (tempAtt > tempDef)
+        Move move = new Move("Cleave", rollDice(1, Attack) - 1, rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) - 2);
+        BattleManager battleRef = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
+        List<Entity> tempList = battleRef.enemyList;
+
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+        if (move.Att > move.Def)
         {
-            tempDam = rollDice(Damage[0], Damage[1]) - 2;
-            Debug.Log(Name + ": " + moveName + " on " + target.Name + " for " + tempDam);
-            target.Health -= tempDam;
+            target.Health -= move.Dam;
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam + ". Main");
         }
         else
         {
-            Debug.Log(Name + ": " + moveName + " on " + target.Name + " missed!");
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " missed! Main");
         }
+        Debug.Log("Whats this location? " + battleRef.returnEnemyLocation(target));
+        if (battleRef.returnEnemyLocation(target) < tempList.Count - 1)
+        {
+            move = new Move("Cleave", rollDice(1, Attack) - 1, rollDice(1, tempList[battleRef.returnEnemyLocation(target) + 1].Defence), rollDice(Damage[0], Damage[1]) - 2);
+            Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+            if (move.Att > move.Def)
+            {
+                tempList[battleRef.returnEnemyLocation(target) + 1].Health -= move.Dam;
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) + 1].Name + " for " + move.Dam + ". Place: " + (battleRef.returnEnemyLocation(target) + 1));
+            }
+            else
+            {
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) + 1].Name + " missed! Place: " + (battleRef.returnEnemyLocation(target) + 1));
+            }
+        }
+        if (battleRef.returnEnemyLocation(target) > 0)
+        {
+            move = new Move("Cleave", rollDice(1, Attack) - 1, rollDice(1, tempList[battleRef.returnEnemyLocation(target) - 1].Defence), rollDice(Damage[0], Damage[1]) - 2);
+            Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+            if (move.Att > move.Def)
+            {
+                tempList[battleRef.returnEnemyLocation(target) - 1].Health -= move.Dam;
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) - 1].Name + " for " + move.Dam + ". Place: " + (battleRef.returnEnemyLocation(target) - 1));
+            }
+            else
+            {
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) - 1].Name + " missed! Place: " + (battleRef.returnEnemyLocation(target) - 1));
+            }
+        }
+        
     }
     /// <summary>
     /// Bolster

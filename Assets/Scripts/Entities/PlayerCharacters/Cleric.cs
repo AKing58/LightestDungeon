@@ -37,11 +37,10 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move2(Entity target)
     {
-        Move move = new Move("Mind Blast", rollDice(1, Attack - 2), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]));
+        Move move = new Move("Mind Blast", rollDice(1, Attack - 2), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) + 5);
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            move.Dam = rollDice(Damage[0], Damage[1]);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -82,7 +81,6 @@ public class Cleric : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            move.Dam = rollDice(Damage[0], Damage[1]);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -92,15 +90,18 @@ public class Cleric : Entity
         }
     }
     /// <summary>
-    /// 
-    /// Att: 0
-    /// Dam: 0
+    /// Favor
+    /// -------Attack Buff
+    /// Att: NA
+    /// Dam: NA
     /// Target: Single
-    /// Status: None
+    /// Status: AttBuff
     /// </summary>
     /// <param name="target"></param>
     public override void move5(Entity target)
     {
-        Debug.Log("Cleric Move5 on " + target.Name);
+        string moveName = "Favor";
+        target.StatusEffects["AttBuff"] += 5;
+        Debug.Log(moveName + " on " + target.Name);
     }
 }

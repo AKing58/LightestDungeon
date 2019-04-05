@@ -100,6 +100,13 @@ public class BattleManager : MonoBehaviour
         {
             turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
         }
+        else
+        {
+            DungeonManager d = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
+            int newTarget = d.randSeed.Next(0, d.playerList.Count-1);
+            turnOrder[turnNo].move1(d.playerList[newTarget]);
+            nextTurn();
+        }
     }
 
     /// <summary>
@@ -113,10 +120,40 @@ public class BattleManager : MonoBehaviour
         }
         turnNo++;
         //Debug.Log(turnOrder[turnNo++].Name);
+
         if (turnNo > turnOrder.Count - 1)
+        {
             turnNo = 0;
-        if (!turnOrder[turnNo].Friendly)
-            turnNo = 0;
-        currentTurn();
+            foreach (Entity e in turnOrder)
+                e.refreshStatusEffects();
+        }
+
+        if(turnOrder[turnNo].StatusEffects["Bleed"] > 0)
+        {
+            turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
+            Debug.Log(turnOrder[turnNo].Name + " took " + (turnOrder[turnNo].StatusEffects["Bleed"] + 1) + " bleed damage.");
+        }
+
+        if (turnOrder[turnNo].StatusEffects["Stun"] > 0)
+        {
+            turnOrder[turnNo].StatusEffects["Stun"]--;
+            Debug.Log(turnOrder[turnNo].Name + " missed a turn (Stun).");
+            nextTurn();
+        }
+        else
+        {
+            currentTurn();
+        }
+        
+    }
+
+    public int returnEnemyLocation(Entity target)
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            if (enemyList[i] == target)
+                return i;
+        }
+        return -1;
     }
 }

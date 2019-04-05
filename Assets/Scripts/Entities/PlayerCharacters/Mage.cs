@@ -25,7 +25,6 @@ public class Mage : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            move.Dam = rollDice(Damage[0], Damage[1]);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -45,59 +44,53 @@ public class Mage : Entity
     /// <param name="target"></param>
     public override void move2(Entity target)
     {
-        foreach (Entity e in GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList)
+        foreach (Entity e in GameObject.Find("DungeonManager").GetComponent<BattleManager>().enemyList)
         {
-            Move move = new Move("Group Heal", rollDice(1, Attack), rollDice(1, e.Defence), rollDice(Damage[0], Damage[1]) - 3);
+            Move move = new Move("Earthquake", rollDice(1, Attack), rollDice(1, e.Defence), rollDice(Damage[0], Damage[1]) - 3);
+            Debug.Log(Name + ": " + move.Name + " on " + e.Name + " for " + move.Dam);
             e.Health += move.Dam;
         }
         Debug.Log("Earthquake!");
     }
     /// <summary>
     /// Chain Lightning
-    /// ------If it damages an enemy, attempts attack on an adjacent enemy
+    /// ------If it damages an enemy, attempts attack on an adjacent enemy and get -1 att for the turn
     /// Att: 0
-    /// Dam: -1
+    /// Dam: -3
     /// Target: Single
     /// Status: None
     /// </summary>
     /// <param name="target"></param>
     public override void move3(Entity target)
     {
-        Move move = new Move("Chain Lightning", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1] - 1));
-        List<Entity> tempList = GameObject.Find("DungeonManager").GetComponent<BattleManager>().enemyList;
-        int targetLocation = 0;
-        for(int i=0; i < tempList.Count; i++)
-        {
-            if (tempList[i] = target)
-                targetLocation = i;
-        }
-        
+        Move move = new Move("Chain Lightning", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1])-3);
+        BattleManager battleRef = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
+        List<Entity> tempList = battleRef.enemyList;
+        int targetLocation = battleRef.returnEnemyLocation(target);
+
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
-            if(move.Att > move.Def)
+            if (tempList.Count == 1)
+                return;
+            if (rollDice(0, 1) == 1)
             {
-                target.StatusEffects["AttBuff"] -= 1;
-                target.Health -= move.Dam;
-                if (tempList.Count == 1)
-                    return;
-                if (rollDice(0, 1) == 1)
-                {
-                    if (targetLocation > tempList.Count - 1)
-                        targetLocation -= 2;
-                    else
-                        targetLocation++;
-                }
+                if (targetLocation >= 1)
+                    targetLocation--;
                 else
-                {
-                    if (targetLocation > tempList.Count - 1)
-                        targetLocation -= 2;
-                    else
-                        targetLocation--;
-                }
-                move3(tempList[targetLocation]);
+                    targetLocation++;
             }
+            else
+            {
+                if (targetLocation <= tempList.Count - 1)
+                    targetLocation++;
+                else
+                    targetLocation--;
+            }
+            target.StatusEffects["AttBuff"] -= 1;
+            move3(tempList[targetLocation]);
+            target.Health -= move.Dam;
         }
         else
         {
