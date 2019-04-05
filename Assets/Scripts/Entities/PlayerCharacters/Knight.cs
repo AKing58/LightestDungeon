@@ -7,32 +7,137 @@ public class Knight : Entity
     //Initializes the Knight Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 10, 10, 10, 8);
+        createEntity(name, 1, 10, 10, new int[] { 4, 8 }, 10, 8);
         ClassType = Vocation.Knight;
         Friendly = true;
     }
 
-    //Knight Move 1
+    /// <summary>
+    /// Slash
+    /// Att: 0
+    /// Dam: 0
+    /// Target: Single
+    /// Status: None
+    /// </summary>
+    /// <param name="target"></param>
     public override void move1(Entity target)
     {
-        Debug.Log("Knight Move1 on " + target.Name);
+        Move move = new Move("Slash", rollDice(1, Attack),rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]));
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+        if (move.Att > move.Def)
+        {
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
+            target.Health -= move.Dam;
+        }
+        else
+        {
+            Debug.Log(move.Name + " on " + target.Name + " missed!");
+        }
     }
-    //Knight Move 2
+    /// <summary>
+    /// Shoulder Bash
+    /// -------50% Stun chance
+    /// Att: 0
+    /// Dam: -3
+    /// Target: Single
+    /// Status: Stun
+    /// </summary>
+    /// <param name="target"></param>
     public override void move2(Entity target)
     {
-        Debug.Log("Knight Move2 on " + target.Name);
+        Move move = new Move("Shoulder Bash", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) - 3);
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+        if (move.Att > move.Def)
+        {
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
+            if (rollDice(0,1) == 1)
+                target.StatusEffects["Stun"] += 1;
+            target.Health -= move.Dam;
+        }
+        else
+        {
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " missed!");
+        }
+        
     }
-    //Knight Move 3
+    /// <summary>
+    /// Cleave --------------NEEDS IMPLEMENTATION-----
+    /// Att: -1
+    /// Dam: -2
+    /// Target: Group
+    /// Status: None
+    /// </summary>
+    /// <param name="target"></param>
     public override void move3(Entity target)
     {
-        Debug.Log("Knight Move3 on " + target.Name);
+        Move move = new Move("Cleave", rollDice(1, Attack) - 1, rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) - 2);
+        BattleManager battleRef = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
+        List<Entity> tempList = battleRef.enemyList;
+
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+        if (move.Att > move.Def)
+        {
+            target.Health -= move.Dam;
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam + ". Main");
+        }
+        else
+        {
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " missed! Main");
+        }
+        Debug.Log("Whats this location? " + battleRef.returnEnemyLocation(target));
+        if (battleRef.returnEnemyLocation(target) < tempList.Count - 1)
+        {
+            move = new Move("Cleave", rollDice(1, Attack) - 1, rollDice(1, tempList[battleRef.returnEnemyLocation(target) + 1].Defence), rollDice(Damage[0], Damage[1]) - 2);
+            Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+            if (move.Att > move.Def)
+            {
+                tempList[battleRef.returnEnemyLocation(target) + 1].Health -= move.Dam;
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) + 1].Name + " for " + move.Dam + ". Place: " + (battleRef.returnEnemyLocation(target) + 1));
+            }
+            else
+            {
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) + 1].Name + " missed! Place: " + (battleRef.returnEnemyLocation(target) + 1));
+            }
+        }
+        if (battleRef.returnEnemyLocation(target) > 0)
+        {
+            move = new Move("Cleave", rollDice(1, Attack) - 1, rollDice(1, tempList[battleRef.returnEnemyLocation(target) - 1].Defence), rollDice(Damage[0], Damage[1]) - 2);
+            Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+            if (move.Att > move.Def)
+            {
+                tempList[battleRef.returnEnemyLocation(target) - 1].Health -= move.Dam;
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) - 1].Name + " for " + move.Dam + ". Place: " + (battleRef.returnEnemyLocation(target) - 1));
+            }
+            else
+            {
+                Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) - 1].Name + " missed! Place: " + (battleRef.returnEnemyLocation(target) - 1));
+            }
+        }
+        
     }
-    //Knight Move 4
+    /// <summary>
+    /// Bolster
+    /// Att: NA
+    /// Dam: NA
+    /// Target: Single
+    /// Status: DefBuff
+    /// </summary>
+    /// <param name="target"></param>
     public override void move4(Entity target)
     {
-        Debug.Log("Knight Move4 on " + target.Name);
+        string moveName = "Bolster";
+        target.StatusEffects["DefBuff"] += 5;
+        Debug.Log(moveName + " on " + target.Name);
     }
-    //Knight Move 5
+
+    /// <summary>
+    /// 
+    /// Att: NA
+    /// Dam: NA
+    /// Target: Single
+    /// Status: None
+    /// </summary>
+    /// <param name="target"></param>
     public override void move5(Entity target)
     {
         Debug.Log("Knight Move5 on" + target.Name);

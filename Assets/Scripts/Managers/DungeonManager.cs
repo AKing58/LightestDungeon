@@ -13,6 +13,8 @@ public class DungeonManager : MonoBehaviour
     public List<Entity> playerList;
     public BattleManager curBattle;
 
+    public System.Random randSeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class DungeonManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+        randSeed = new System.Random();
     }
 
     /// <summary>
