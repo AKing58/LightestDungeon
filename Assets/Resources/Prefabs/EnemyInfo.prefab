@@ -481,14 +481,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190610992593067288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daccd18051a21c34eaacd0ae1c157e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2726f533f14f16a4d93dfb23e4502e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisBattle: {fileID: 0}
   NameTxt: {fileID: 1190610992022496084}
-  HPTxt: {fileID: 1190610993461332089}
   AttackTxt: {fileID: 1190610993353465741}
-  panelNo: 1
+  HealthTxt: {fileID: 1190610993461332089}
 --- !u!1 &1190610992736307180
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,14 +653,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190610992742723348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daccd18051a21c34eaacd0ae1c157e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2726f533f14f16a4d93dfb23e4502e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisBattle: {fileID: 0}
   NameTxt: {fileID: 1190610992814638566}
-  HPTxt: {fileID: 1190610993653367909}
   AttackTxt: {fileID: 1190610991576746530}
-  panelNo: 2
+  HealthTxt: {fileID: 1190610993653367909}
 --- !u!1 &1190610992750274080
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,14 +746,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190610992750274080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daccd18051a21c34eaacd0ae1c157e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2726f533f14f16a4d93dfb23e4502e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisBattle: {fileID: 0}
   NameTxt: {fileID: 1190610992319857946}
-  HPTxt: {fileID: 1190610993202852264}
   AttackTxt: {fileID: 1190610992736307186}
-  panelNo: 4
+  HealthTxt: {fileID: 1190610993202852264}
 --- !u!1 &1190610992814638560
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,14 +918,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190610992894333232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daccd18051a21c34eaacd0ae1c157e6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2726f533f14f16a4d93dfb23e4502e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisBattle: {fileID: 0}
   NameTxt: {fileID: 1190610993017071505}
-  HPTxt: {fileID: 1190610993170445600}
   AttackTxt: {fileID: 1190610991736459903}
-  panelNo: 3
+  HealthTxt: {fileID: 1190610993170445600}
 --- !u!1 &1190610993017071507
 GameObject:
   m_ObjectHideFlags: 0

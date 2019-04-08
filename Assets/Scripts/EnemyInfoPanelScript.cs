@@ -9,6 +9,8 @@ public class EnemyInfoPanelScript : MonoBehaviour
     public Text AttackTxt;
     public Text HealthTxt;
 
+    public Entity thisEntity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,12 @@ public class EnemyInfoPanelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameObject.Find("DungeonManager").GetComponent<DungeonManager>().curBattle != null)
+        {
+            NameTxt.text = thisEntity.Name;
+            HealthTxt.text = "HP: " + thisEntity.Health.ToString();
+            AttackTxt.text = "Attack: " + thisEntity.Attack.ToString();
+            thisEntity.myPanel = this.gameObject;
+        }
     }
 }

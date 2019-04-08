@@ -35,6 +35,7 @@ public class BattleManager : MonoBehaviour
             enemyObject.transform.parent = parent.transform;
             parseClassName(enemyObject, "Orc", "Orcman" + i);
             thisEnemy = enemyObject.GetComponent<Entity>();
+            GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + (i+1)).GetComponent<EnemyInfoPanelScript>().thisEntity = thisEnemy;
             enemyList.Add(thisEnemy);
         }
         initTurnOrder();
