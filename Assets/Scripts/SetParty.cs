@@ -50,6 +50,7 @@ public class SetParty : MonoBehaviour
         parseClassName(playerObject, dropdownClass1.transform.Find("Label").GetComponent<Text>().text, nameField1.transform.Find("Text").GetComponent<Text>().text);
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel1").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
 
         // Creates the second player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass2.transform.Find("Label").GetComponent<Text>().text) as GameObject;
@@ -58,6 +59,7 @@ public class SetParty : MonoBehaviour
         parseClassName(playerObject, dropdownClass2.transform.Find("Label").GetComponent<Text>().text, nameField2.transform.Find("Text").GetComponent<Text>().text);
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel2").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
 
         // Creates the third player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass3.transform.Find("Label").GetComponent<Text>().text) as GameObject;
@@ -66,6 +68,7 @@ public class SetParty : MonoBehaviour
         parseClassName(playerObject, dropdownClass3.transform.Find("Label").GetComponent<Text>().text, nameField3.transform.Find("Text").GetComponent<Text>().text);
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel3").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
 
         // Creates the fourth player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/" + dropdownClass4.transform.Find("Label").GetComponent<Text>().text) as GameObject;
@@ -74,7 +77,59 @@ public class SetParty : MonoBehaviour
         parseClassName(playerObject, dropdownClass4.transform.Find("Label").GetComponent<Text>().text, nameField4.transform.Find("Text").GetComponent<Text>().text);
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
-        
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel4").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
+
+
+        attachMovement();
+        partyWindow.SetActive(false);
+    }
+
+    //Creates a default party
+    public void defaultParty()
+    {
+        GameObject playerPreFab;
+        GameObject playerObject;
+        GameObject parent = GameObject.Find("Players");
+        Entity thisPlayer;
+
+        // Creates the first player object, setting name, prefab, and class type
+        playerPreFab = Resources.Load("Prefabs/Knight") as GameObject;
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[0], 0, 0), Quaternion.identity);
+        playerObject.transform.parent = parent.transform;
+        parseClassName(playerObject, "Knight", "Reynauld");
+        thisPlayer = playerObject.GetComponent<Entity>();
+        thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel1").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
+
+
+
+        // Creates the second player object, setting name, prefab, and class type
+        playerPreFab = Resources.Load("Prefabs/Rogue") as GameObject;
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[1], 0, 0), Quaternion.identity);
+        playerObject.transform.parent = parent.transform;
+        parseClassName(playerObject, "Rogue", "Dismas");
+        thisPlayer = playerObject.GetComponent<Entity>();
+        thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel2").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
+
+        // Creates the third player object, setting name, prefab, and class type
+        playerPreFab = Resources.Load("Prefabs/Cleric") as GameObject;
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[2], 0, 0), Quaternion.identity);
+        playerObject.transform.parent = parent.transform;
+        parseClassName(playerObject, "Cleric", "Tyrande");
+        thisPlayer = playerObject.GetComponent<Entity>();
+        thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel3").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
+
+        // Creates the fourth player object, setting name, prefab, and class type
+        playerPreFab = Resources.Load("Prefabs/Mage") as GameObject;
+        playerObject = Instantiate(playerPreFab, parent.transform.position + new Vector3(thisDungeon.position[3], 0, 0), Quaternion.identity);
+        playerObject.transform.parent = parent.transform;
+        parseClassName(playerObject, "Mage", "Blue");
+        thisPlayer = playerObject.GetComponent<Entity>();
+        thisDungeon.playerList.Add(thisPlayer);
+        GameObject.Find("UI/LeftPanel/CharacterInfoPanel4").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
+
 
         attachMovement();
         partyWindow.SetActive(false);

@@ -35,12 +35,12 @@ public class CharacterInfoPanelScript : MonoBehaviour
     {
         if (panelNo < thisDungeon.playerList.Count)
         {
-            thisEntity = thisDungeon.playerList[panelNo];
+            //thisEntity = thisDungeon.playerList[panelNo];
             ClassTxt.text = thisEntity.ClassType.ToString();
-            NameTxt.text = thisDungeon.playerList[panelNo].Name;
-            HPTxt.text = "HP: " + thisDungeon.playerList[panelNo].Health.ToString();
-            AttackTxt.text = "Attack: " + thisDungeon.playerList[panelNo].Attack.ToString();
-            DefenceTxt.text = "Defence: " + thisDungeon.playerList[panelNo].Defence.ToString();
+            NameTxt.text = thisEntity.Name;
+            HPTxt.text = "HP: " + thisEntity.Health.ToString();
+            AttackTxt.text = "Attack: " + thisEntity.Attack.ToString();
+            DefenceTxt.text = "Defence: " + thisEntity.Defence.ToString();
             thisEntity.myPanel = this.gameObject; 
         }
     }

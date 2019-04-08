@@ -25,8 +25,20 @@ public class Entity : MonoBehaviour{
         set
         {
             health = value;
+            if (health > Max_Health)
+                health = Max_Health;
             if (health <= 0)
+            {
+                BattleManager bm = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
+                Debug.Log(Name + " Died");
+                //bm.nextTurn();
+                bm.turnOrder.Remove(this);
+                GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList.Remove(this);
+                bm.enemyList.Remove(this);
+                if(myPanel != null)
+                    Destroy(myPanel.gameObject);
                 Destroy(gameObject);
+            }
         }
     }
     private int attack;
@@ -103,6 +115,7 @@ public class Entity : MonoBehaviour{
     {
         Name = name;
         Level = lv;
+        Max_Health = hp;
         Health = hp;
         Attack = att;
         Defence = def;
