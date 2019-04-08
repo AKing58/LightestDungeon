@@ -131,7 +131,7 @@ public class Entity : MonoBehaviour{
         StatusEffects.Add("Stun", 0);
         StatusEffects.Add("Bleed", 0);
 
-        CurPosition = Position.Front;
+        CurPosition = Position.Back;
         locPosx = transform.localPosition.x;
         locPosy = transform.localPosition.y;
         locPosz = transform.localPosition.z;
@@ -152,21 +152,21 @@ public class Entity : MonoBehaviour{
     {
         float movementAmount;
         if (Friendly)
-            movementAmount = -1.5F;
+            movementAmount = 1F;
         else
-            movementAmount = 1.5F;
+            movementAmount = -1F;
         //CurPosition = CurPosition == Position.Front ? Position.Back : Position.Front;
-        if (CurPosition == Entity.Position.Front)
+        if (CurPosition == Entity.Position.Back)
         {
             transform.localPosition = new Vector3(locPosx, locPosy, locPosz + movementAmount);
-            CurPosition = Entity.Position.Back;
+            CurPosition = Entity.Position.Front;
             Debug.Log("Front to back");
         }
         else
         {
             Debug.Log("Back to front");
             transform.localPosition = new Vector3(locPosx, locPosy, locPosz);
-            CurPosition = Entity.Position.Front;
+            CurPosition = Entity.Position.Back;
         }
     }
     //On mouse over event used to activate the selection UI
@@ -241,6 +241,8 @@ public class Entity : MonoBehaviour{
     //Once the Entity performs the move on a target, moves on to the next turn
     public void didMove()
     {
+        switchPosition();
+        myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
         GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();
     }
 

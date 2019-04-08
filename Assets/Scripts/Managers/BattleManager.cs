@@ -31,7 +31,7 @@ public class BattleManager : MonoBehaviour
         for(int i=0; i<4; i++)
         {
             enemyPreFab = Resources.Load("Prefabs/Orc") as GameObject;
-            enemyObject = Instantiate(enemyPreFab, parent.transform.position + new Vector3(thisDungeon.position[enemyList.Count], 0, 0), Quaternion.identity);
+            enemyObject = Instantiate(enemyPreFab, parent.transform.position + new Vector3(thisDungeon.position[enemyList.Count], 0, 1.5f), Quaternion.identity);
             enemyObject.transform.parent = parent.transform;
             parseClassName(enemyObject, "Orc", "Orcman" + i);
             thisEnemy = enemyObject.GetComponent<Entity>();
@@ -96,6 +96,7 @@ public class BattleManager : MonoBehaviour
         else
             turnOrder[turnNo - 1].isTurn = false;
         turnOrder[turnNo].isTurn = true;
+        turnOrder[turnNo].switchPosition();
         if (turnOrder[turnNo].Friendly)
         {
             Debug.Log(turnOrder[turnNo].Name + " Panel enable");
@@ -105,6 +106,7 @@ public class BattleManager : MonoBehaviour
         {
             DungeonManager d = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
             int newTarget = d.randSeed.Next(0, d.playerList.Count-1);
+            turnOrder[turnNo].switchPosition();
             turnOrder[turnNo].move1(d.playerList[newTarget]);
             nextTurn();
         }
@@ -127,22 +129,13 @@ public class BattleManager : MonoBehaviour
             gameOver();
             return;
         }
-        if (turnOrder[turnNo].Friendly)
-        {
-            Debug.Log(turnOrder[turnNo].Name + " Panel disable");
-            turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
-        }
+        
         turnNo++;
+        if (turnNo > turnOrder.Count - 1)
+            turnNo = 0;
         //Debug.Log(turnOrder[turnNo++].Name);
 
-        if (turnNo > turnOrder.Count - 1)
-        {
-            turnNo = 0;
-            foreach (Entity e in turnOrder)
-                e.refreshStatusEffects();
-        }
-
-        if(turnOrder[turnNo].StatusEffects["Bleed"] > 0)
+        if (turnOrder[turnNo].StatusEffects["Bleed"] > 0)
         {
             turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
             Debug.Log(turnOrder[turnNo].Name + " took " + (turnOrder[turnNo].StatusEffects["Bleed"] + 1) + " bleed damage.");
