@@ -72,6 +72,8 @@ public class Mage : Entity
         if (move.Att > move.Def)
         {
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
+            target.StatusEffects["AttBuff"] -= 1;
+            target.Health -= move.Dam;
             if (tempList.Count == 1)
                 return;
             if (rollDice(0, 1) == 1)
@@ -88,9 +90,7 @@ public class Mage : Entity
                 else
                     targetLocation--;
             }
-            target.StatusEffects["AttBuff"] -= 1;
             move3(tempList[targetLocation]);
-            target.Health -= move.Dam;
         }
         else
         {

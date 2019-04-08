@@ -22,7 +22,6 @@ public class BattleManager : MonoBehaviour
     {
         thisDungeon = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         turnNo = 0;
-        GameObject.Find("UI/RightPanel/Button").GetComponent<Button>().onClick.AddListener(thisDungeon.curBattle.currentTurn);
         enemyList = new List<Entity>();
         GameObject enemyPreFab;
         GameObject enemyObject;
@@ -34,7 +33,7 @@ public class BattleManager : MonoBehaviour
             enemyPreFab = Resources.Load("Prefabs/Orc") as GameObject;
             enemyObject = Instantiate(enemyPreFab, parent.transform.position + new Vector3(thisDungeon.position[enemyList.Count], 0, 0), Quaternion.identity);
             enemyObject.transform.parent = parent.transform;
-            parseClassName(enemyObject, "Orc", "Orcman");
+            parseClassName(enemyObject, "Orc", "Orcman" + i);
             thisEnemy = enemyObject.GetComponent<Entity>();
             enemyList.Add(thisEnemy);
         }
@@ -98,6 +97,7 @@ public class BattleManager : MonoBehaviour
         turnOrder[turnNo].isTurn = true;
         if (turnOrder[turnNo].Friendly)
         {
+            Debug.Log(turnOrder[turnNo].Name + " Panel enable");
             turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
         }
         else
@@ -114,8 +114,21 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void nextTurn()
     {
+        if (GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList.Count == 0)
+        {
+            Debug.Log("You Lose");
+            gameOver();
+            return;
+        }
+        if(enemyList.Count == 0)
+        {
+            Debug.Log("You Win!");
+            gameOver();
+            return;
+        }
         if (turnOrder[turnNo].Friendly)
         {
+            Debug.Log(turnOrder[turnNo].Name + " Panel disable");
             turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
         }
         turnNo++;
@@ -147,11 +160,31 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    private void gameOver()
+    {
+        foreach (Entity e in enemyList)
+            Destroy(e.gameObject);
+        foreach (Entity e in thisDungeon.playerList)
+            e.myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
+        Destroy(this);
+    }
+
     public int returnEnemyLocation(Entity target)
     {
         for (int i = 0; i < enemyList.Count; i++)
         {
             if (enemyList[i] == target)
+                return i;
+        }
+        return -1;
+    }
+
+    public int returnPlayerLocation(Entity target)
+    {
+        List<Entity> pList = GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList;
+        for (int i = 0; i < pList.Count; i++)
+        {
+            if (pList[i] == target)
                 return i;
         }
         return -1;
