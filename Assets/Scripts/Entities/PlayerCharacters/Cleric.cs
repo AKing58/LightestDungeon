@@ -7,7 +7,7 @@ public class Cleric : Entity
     //Initializes the Cleric Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 10, 8, new int[] { 1, 6 }, 14, 8);
+        createEntity(name, 1, 10, 8, new int[] { 1, 6 }, 12, 8);
         ClassType = Vocation.Cleric;
         Friendly = true;
     }
@@ -22,7 +22,7 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move1(Entity target)
     {
-        Move move = new Move("Healing Touch", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1] + 2));
+        Move move = new Move("Healing Touch", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1]+2));
         target.Health += move.Dam;
         Debug.Log("Healing for " + move.Dam + " on " + target.Name);
     }
@@ -37,7 +37,7 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move2(Entity target)
     {
-        Move move = new Move("Mind Blast", rollDice(1, Attack - 2), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) + 5);
+        Move move = new Move("Mind Blast", rollDice(1, Attack)-2, rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) + 5);
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {

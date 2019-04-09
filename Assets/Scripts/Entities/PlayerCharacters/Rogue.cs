@@ -121,7 +121,7 @@ public class Rogue : Entity
     public override void move5(Entity target)
     {
         string moveName = "Dodge";
-        StatusEffects["DefBuffNext"] += 100;
+        StatusEffects["DefNext"] += 100;
         Debug.Log(moveName + " on " + Name);
     }
     private void resetDefDebuff(Entity e)

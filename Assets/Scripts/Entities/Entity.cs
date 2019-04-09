@@ -24,7 +24,18 @@ public class Entity : MonoBehaviour{
         get { return health; }
         set
         {
-            health = value;
+            if (StatusEffects["TempHealth"] > 0 && value < health)
+            {
+                int tempTempHealth = StatusEffects["TempHealth"];
+                if (value * -1 > tempTempHealth)
+                    value += StatusEffects["TempHealth"];
+                else
+                    StatusEffects["TempHealth"] += value;
+            }
+            else
+            {
+                health = value;
+            }
             if (health > Max_Health)
                 health = Max_Health;
             if (health <= 0)
@@ -110,6 +121,17 @@ public class Entity : MonoBehaviour{
     //Basically a constructor
     public void createEntity(string name, int lv, int hp, int att, int[] dam,int def, int speed)
     {
+        StatusEffects = new Dictionary<string, int>();
+        StatusEffects.Add("AttBuff", 0);
+        StatusEffects.Add("AttBuffNext", 0);
+        StatusEffects.Add("DefBuff", 0);
+        StatusEffects.Add("DefBuffNext", 0);
+        StatusEffects.Add("DamBuff", 0);
+        StatusEffects.Add("DamBuffNext", 0);
+        StatusEffects.Add("TempHealth", 0);
+        StatusEffects.Add("Stun", 0);
+        StatusEffects.Add("Bleed", 0);
+
         Name = name;
         Level = lv;
         Max_Health = hp;
@@ -118,16 +140,7 @@ public class Entity : MonoBehaviour{
         Defence = def;
         Damage = dam;
 
-        StatusEffects = new Dictionary<string, int>();
-        StatusEffects.Add("AttBuff", 0);
-        StatusEffects.Add("AttBuffNext", 0);
-        StatusEffects.Add("DefBuff", 0);
-        StatusEffects.Add("DefBuffNext", 0);
-        StatusEffects.Add("DamBuff", 0);
-        StatusEffects.Add("DamBuffNext", 0);
-        StatusEffects.Add("Stun", 0);
-        StatusEffects.Add("Bleed", 0);
-
+        
         CurPosition = Position.Back;
         locPosx = transform.localPosition.x;
         locPosy = transform.localPosition.y;
@@ -147,6 +160,7 @@ public class Entity : MonoBehaviour{
         StatusEffects["AttBuff"] = 0;
         StatusEffects["DefBuff"] = 0;
         StatusEffects["DamBuff"] = 0;
+        StatusEffects["TempHealth"] = 0;
     }
 
     //To be overrided by derived classes for initialization of a derived entity

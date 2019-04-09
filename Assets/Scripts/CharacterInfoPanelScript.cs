@@ -38,7 +38,10 @@ public class CharacterInfoPanelScript : MonoBehaviour
             //thisEntity = thisDungeon.playerList[panelNo];
             ClassTxt.text = thisEntity.ClassType.ToString();
             NameTxt.text = thisEntity.Name;
-            HPTxt.text = "HP: " + thisEntity.Health.ToString();
+            if(thisEntity.StatusEffects["TempHealth"] > 0)
+                HPTxt.text = "HP: " + thisEntity.Health.ToString() + "+(" + thisEntity.StatusEffects["TempHealth"] + ")" + "/" + thisEntity.Max_Health;
+            else
+                HPTxt.text = "HP: " + thisEntity.Health.ToString() + "/" + thisEntity.Max_Health;
             AttackTxt.text = "Attack: " + thisEntity.Attack.ToString();
             DefenceTxt.text = "Defence: " + thisEntity.Defence.ToString();
             thisEntity.myPanel = this.gameObject; 
