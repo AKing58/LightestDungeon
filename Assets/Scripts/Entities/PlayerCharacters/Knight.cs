@@ -50,8 +50,11 @@ public class Knight : Entity
         if (move.Att > move.Def)
         {
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
-            if (rollDice(0,1) == 1)
+            if (rollDice(1,10) <= 7)
+            {
+                Debug.Log("Stunned!");
                 target.StatusEffects["Stun"] += 1;
+            }
             target.Health -= move.Dam;
         }
         else
@@ -142,6 +145,8 @@ public class Knight : Entity
     /// <param name="target"></param>
     public override void move5(Entity target)
     {
-        Debug.Log("Knight Move5 on" + target.Name);
+        string moveName = "Tank Up";
+        target.StatusEffects["TempHealth"] += rollDice(3,10);
+        Debug.Log(moveName + " on " + target.Name);
     }
 }

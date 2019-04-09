@@ -23,14 +23,18 @@ public class Entity : MonoBehaviour{
         get { return health; }
         set
         {
-//          if (value < health)
-//          {
-//              InitCBT("hello", true);
-//          } else
-//          {
-//              InitCBT("hello2", false);
-//          }
-            health = value;
+            if (StatusEffects["TempHealth"] > 0 && value < health)
+            {
+                int tempTempHealth = StatusEffects["TempHealth"];
+                if (value * -1 > tempTempHealth)
+                    value += StatusEffects["TempHealth"];
+                else
+                    StatusEffects["TempHealth"] += value;
+            }
+            else
+            {
+                health = value;
+            }
             if (health > Max_Health)
                 health = Max_Health;
             if (health <= 0)
@@ -41,8 +45,10 @@ public class Entity : MonoBehaviour{
                 bm.turnOrder.Remove(this);
                 GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList.Remove(this);
                 bm.enemyList.Remove(this);
-                if(myPanel != null)
+                if(myPanel != null && Friendly)
                     Destroy(myPanel.gameObject);
+                if (myPanel!=null && !Friendly)
+                    myPanel.GetComponent<EnemyInfoPanelScript>().defeatedPanel();
                 Destroy(gameObject);
             }
         }
@@ -51,14 +57,9 @@ public class Entity : MonoBehaviour{
     public int Attack {
         get
         {
-            int tempValue;
-            if(ClassType == Vocation.Rogue)
-            {
-                tempValue = attack + StatusEffects["AttBuff"] + StatusEffects["AttBuffNext"];
-                StatusEffects["AttBuffNext"] = 0;
-                return tempValue;
-            }
-            return attack + StatusEffects["AttBuff"];
+            int tempValue = attack + StatusEffects["AttBuff"] + StatusEffects["AttBuffNext"];
+            StatusEffects["AttBuffNext"] = 0;
+            return tempValue;
         }
         set { attack = value; }
     }
@@ -70,13 +71,11 @@ public class Entity : MonoBehaviour{
             for(int i=0; i<2; i++)
             {
                 tempDam[i] += StatusEffects["DamBuff"];
-                if(ClassType == Vocation.Rogue)
-                    tempDam[i] += StatusEffects["DamBuffNext"];
+                tempDam[i] += StatusEffects["DamBuffNext"];
             }
-
-            if (ClassType == Vocation.Rogue)
-                StatusEffects["DamBuffNext"] = 0;
-                return tempDam; }
+            
+            StatusEffects["DamBuffNext"] = 0;
+            return tempDam; }
         set { damage = value; }
     }
     private int defence;
@@ -84,7 +83,9 @@ public class Entity : MonoBehaviour{
     {
         get
         {
-            return defence + StatusEffects["DefBuff"];
+            int tempDef = defence + StatusEffects["DefBuff"] + StatusEffects["DefBuffNext"];
+            StatusEffects["DefBuffNext"] = 0;
+            return tempDef;
         }
         set { defence = value; }
     }
@@ -119,6 +120,17 @@ public class Entity : MonoBehaviour{
     //Basically a constructor
     public void createEntity(string name, int lv, int hp, int att, int[] dam,int def, int speed)
     {
+        StatusEffects = new Dictionary<string, int>();
+        StatusEffects.Add("AttBuff", 0);
+        StatusEffects.Add("AttBuffNext", 0);
+        StatusEffects.Add("DefBuff", 0);
+        StatusEffects.Add("DefBuffNext", 0);
+        StatusEffects.Add("DamBuff", 0);
+        StatusEffects.Add("DamBuffNext", 0);
+        StatusEffects.Add("TempHealth", 0);
+        StatusEffects.Add("Stun", 0);
+        StatusEffects.Add("Bleed", 0);
+
         Name = name;
         Level = lv;
         Max_Health = hp;
@@ -127,20 +139,19 @@ public class Entity : MonoBehaviour{
         Defence = def;
         Damage = dam;
 
-        StatusEffects = new Dictionary<string, int>();
-        StatusEffects.Add("AttBuff", 0);
-        StatusEffects.Add("AttBuffNext", 0);
-        StatusEffects.Add("DefBuff", 0);
-        StatusEffects.Add("DefBuffNext", 0);
-        StatusEffects.Add("DamBuff", 0);
-        StatusEffects.Add("DamBuffNext", 0);
-        StatusEffects.Add("Stun", 0);
-        StatusEffects.Add("Bleed", 0);
-
+        
         CurPosition = Position.Back;
         locPosx = transform.localPosition.x;
         locPosy = transform.localPosition.y;
         locPosz = transform.localPosition.z;
+
+        //if(Friendly)
+        //    parent = GameObject.Find("Players");
+        //else
+        //    parent = GameObject.Find("Enemies");
+        //
+        //destination = parent.transform.position + new Vector3(locPosx, locPosy, locPosz);
+
     }
 
     public void refreshStatusEffects()
@@ -148,6 +159,7 @@ public class Entity : MonoBehaviour{
         StatusEffects["AttBuff"] = 0;
         StatusEffects["DefBuff"] = 0;
         StatusEffects["DamBuff"] = 0;
+        StatusEffects["TempHealth"] = 0;
     }
 
     //To be overrided by derived classes for initialization of a derived entity
@@ -247,6 +259,7 @@ public class Entity : MonoBehaviour{
     //Once the Entity performs the move on a target, moves on to the next turn
     public void didMove()
     {
+        //needsMovement = true;
         switchPosition();
         myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
         GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();
@@ -294,4 +307,30 @@ public class Entity : MonoBehaviour{
 //      temp.GetComponent<Animator>().SetTrigger("Hit");
 //      Destroy(temp.gameObject, 2);
 //  }
+    //Vector3 originalPosition;
+    //Vector3 destination;
+    //bool needsMovement = false;
+    //float speed = 5f;
+    //GameObject parent;
+    //
+    //void Update()
+    //{
+    //
+    //    if (Friendly)
+    //        parent = GameObject.Find("Players");
+    //    else
+    //        parent = GameObject.Find("Enemies");
+    //    originalPosition = parent.transform.position + new Vector3(locPosx, locPosy, locPosz);
+    //    if (needsMovement)
+    //    {
+    //        destination = parent.transform.position + new Vector3(locPosx, locPosy, 4f);
+    //        needsMovement = false;
+    //    }
+    //    if(!isTurn)
+    //        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+    //    if (Vector3.Distance(transform.position, destination) < 0.001f)
+    //    {
+    //        destination = originalPosition;
+    //    }
+    //}
 }

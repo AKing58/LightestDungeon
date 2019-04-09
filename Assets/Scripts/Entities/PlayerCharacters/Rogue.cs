@@ -7,7 +7,7 @@ public class Rogue : Entity
     //Initializes the Rogue Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 8, 12, new int[] { 2, 12 }, 8, 12);
+        createEntity(name, 1, 8, 12, new int[] { 2, 10 }, 8, 12);
         ClassType = Vocation.Rogue;
         Friendly = true;
     }
@@ -16,7 +16,7 @@ public class Rogue : Entity
     /// -------Bleeds for 2 on hit, can stack
     /// -------Max damage - 5
     /// Att: +1
-    /// Dam: -3
+    /// Dam: -5
     /// Target: Single
     /// Status: None
     /// </summary>
@@ -57,9 +57,8 @@ public class Rogue : Entity
 
     /// <summary>
     /// Mark
-    /// -------Applies a defence debuff for the next against a target of your choice
-    /// -------Only Rogues can make use of this lowered defence
-    /// -------Any damage from rogues will reset this debuff
+    /// -------Applies a defence debuff for the next attack against a target of your choice
+    /// -------Any damage from will reset this debuff
     /// Att: 0
     /// Dam: -3
     /// Target: Single
@@ -84,15 +83,46 @@ public class Rogue : Entity
         }
         Debug.Log(target.Name + " has been Marked by " + Name + " Current Defence Debuff: " + target.StatusEffects["DefBuffNext"]);
     }
-    //Rogue Move 4
+
+    /// <summary>
+    /// Disarm
+    /// -------Applies an attack debuff for the next against a target of your choice
+    /// Att: 0
+    /// Dam: -3
+    /// Target: Single
+    /// Status: DefBuff (negative)
+    /// </summary>
+    /// <param name="target"></param>
     public override void move4(Entity target)
     {
-        Debug.Log("Rogue Move4 on " + target.Name);
+        Move move = new Move("Disarm", rollDice(1, Attack) + 1, rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]) - 5);
+        Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+        if (move.Att > move.Def)
+        {
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
+            target.StatusEffects["AttBuff"] -= 3;
+            target.Health -= move.Dam;
+        }
+        else
+        {
+            Debug.Log(Name + ": " + move.Name + " on " + target.Name + " missed!");
+        }
     }
-    //Rogue Move 5
+
+    /// <summary>
+    /// Dodge
+    /// -------Increases defence by an extremely high amount against the next attack
+    /// Att: NA
+    /// Dam: NA
+    /// Target: Self
+    /// Status: DefBuff
+    /// </summary>
+    /// <param name="target"></param>
     public override void move5(Entity target)
     {
-        Debug.Log("Rogue Move5 on " + target.Name);
+        string moveName = "Dodge";
+        StatusEffects["DefNext"] += 100;
+        Debug.Log(moveName + " on " + Name);
     }
     private void resetDefDebuff(Entity e)
     {
