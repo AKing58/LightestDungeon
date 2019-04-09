@@ -13,17 +13,6 @@ public class BattleManager : MonoBehaviour
     public DungeonManager thisDungeon;
     public List<Entity> turnOrder;
     public int turnNo;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     /// <summary>
     /// Method to start the battle sequence
@@ -33,7 +22,6 @@ public class BattleManager : MonoBehaviour
     {
         thisDungeon = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         turnNo = 0;
-        GameObject.Find("UI/RightPanel/Button").GetComponent<Button>().onClick.AddListener(thisDungeon.curBattle.currentTurn);
         enemyList = new List<Entity>();
         GameObject enemyPreFab;
         GameObject enemyObject;
@@ -43,10 +31,11 @@ public class BattleManager : MonoBehaviour
         for(int i=0; i<4; i++)
         {
             enemyPreFab = Resources.Load("Prefabs/Orc") as GameObject;
-            enemyObject = Instantiate(enemyPreFab, parent.transform.position + new Vector3(thisDungeon.position[enemyList.Count], 0, 0), Quaternion.identity);
+            enemyObject = Instantiate(enemyPreFab, parent.transform.position + new Vector3(thisDungeon.position[enemyList.Count], 0, 1.5f), Quaternion.identity);
             enemyObject.transform.parent = parent.transform;
-            parseClassName(enemyObject, "Orc", "Orcman");
+            parseClassName(enemyObject, "Orc", "Orcman" + i);
             thisEnemy = enemyObject.GetComponent<Entity>();
+            GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + (i+1)).GetComponent<EnemyInfoPanelScript>().thisEntity = thisEnemy;
             enemyList.Add(thisEnemy);
         }
         initTurnOrder();
@@ -108,9 +97,19 @@ public class BattleManager : MonoBehaviour
         else
             turnOrder[turnNo - 1].isTurn = false;
         turnOrder[turnNo].isTurn = true;
+        turnOrder[turnNo].switchPosition();
         if (turnOrder[turnNo].Friendly)
         {
+            Debug.Log(turnOrder[turnNo].Name + " Panel enable");
             turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(true);
+        }
+        else
+        {
+            DungeonManager d = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
+            int newTarget = d.randSeed.Next(0, d.playerList.Count-1);
+            turnOrder[turnNo].switchPosition();
+            turnOrder[turnNo].move1(d.playerList[newTarget]);
+            nextTurn();
         }
     }
 
@@ -119,15 +118,71 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void nextTurn()
     {
-        if (turnOrder[turnNo].Friendly)
+        if (GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList.Count == 0)
         {
-            turnOrder[turnNo].myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
+            Debug.Log("You Lose");
+            gameOver();
+            return;
         }
+        if(enemyList.Count == 0)
+        {
+            Debug.Log("You Win!");
+            gameOver();
+            return;
+        }
+        
         turnNo++;
-        //Debug.Log(turnOrder[turnNo++].Name);
         if (turnNo > turnOrder.Count - 1)
             turnNo = 0;
-        currentTurn();
+        //Debug.Log(turnOrder[turnNo++].Name);
+
+        if (turnOrder[turnNo].StatusEffects["Bleed"] > 0)
+        {
+            turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
+            Debug.Log(turnOrder[turnNo].Name + " took " + (turnOrder[turnNo].StatusEffects["Bleed"] + 1) + " bleed damage.");
+        }
+
+        if (turnOrder[turnNo].StatusEffects["Stun"] > 0)
+        {
+            turnOrder[turnNo].StatusEffects["Stun"]--;
+            Debug.Log(turnOrder[turnNo].Name + " missed a turn (Stun).");
+            nextTurn();
+        }
+        else
+        {
+            currentTurn();
+        }
+        
+    }
+
+    private void gameOver()
+    {
+        foreach (Entity e in enemyList)
+            Destroy(e.gameObject);
+        foreach (Entity e in thisDungeon.playerList)
+            e.myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
+        Destroy(this);
+    }
+
+    public int returnEnemyLocation(Entity target)
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            if (enemyList[i] == target)
+                return i;
+        }
+        return -1;
+    }
+
+    public int returnPlayerLocation(Entity target)
+    {
+        List<Entity> pList = GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList;
+        for (int i = 0; i < pList.Count; i++)
+        {
+            if (pList[i] == target)
+                return i;
+        }
+        return -1;
     }
 
     public void updateEnemies()

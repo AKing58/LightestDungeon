@@ -10,8 +10,8 @@ public class EnemyInfoPanelScript : MonoBehaviour
     public Text AttackTxt;
     public Text HealthTxt;
 
-    public int panelNo;
     public Entity thisEntity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,18 +21,12 @@ public class EnemyInfoPanelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (thisDungeon.curBattle != null && panelNo < thisDungeon.curBattle.enemyList.Count)
+        if(GameObject.Find("DungeonManager").GetComponent<DungeonManager>().curBattle != null)
         {
-            thisEntity = thisDungeon.curBattle.enemyList[panelNo];
-            NameTxt.text = thisDungeon.curBattle.enemyList[panelNo].Name;
-            HealthTxt.text = thisDungeon.curBattle.enemyList[panelNo].Health.ToString();
-            AttackTxt.text = thisDungeon.curBattle.enemyList[panelNo].Attack.ToString();
+            NameTxt.text = thisEntity.Name;
+            HealthTxt.text = "HP: " + thisEntity.Health.ToString();
+            AttackTxt.text = "Attack: " + thisEntity.Attack.ToString();
             thisEntity.myPanel = this.gameObject;
         }
-    }
-
-    public void setPanelActive(bool state)
-    {
-        this.gameObject.SetActive(state);
     }
 }
