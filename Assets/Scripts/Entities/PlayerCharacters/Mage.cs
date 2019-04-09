@@ -25,6 +25,7 @@ public class Mage : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitFireball();
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -106,5 +107,19 @@ public class Mage : Entity
     public override void move5(Entity target)
     {
         Debug.Log("Mage Move5 on " + target.Name);
+    }
+
+    void InitFireball()
+    {
+        GameObject fireball = Resources.Load("Prefabs/Fireball") as GameObject;
+        GameObject temp = Instantiate(fireball, gameObject.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(gameObject.transform);
+        temp.transform.localPosition = fireball.transform.localPosition;
+        temp.transform.localScale = fireball.transform.localScale;
+        temp.transform.localRotation = fireball.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger("FireballCast");
+        Destroy(temp.gameObject, 2);
     }
 }

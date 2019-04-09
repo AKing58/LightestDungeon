@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour{
     //Custom Enums
@@ -24,6 +23,13 @@ public class Entity : MonoBehaviour{
         get { return health; }
         set
         {
+//          if (value < health)
+//          {
+//              InitCBT("hello", true);
+//          } else
+//          {
+//              InitCBT("hello2", false);
+//          }
             health = value;
             if (health > Max_Health)
                 health = Max_Health;
@@ -268,4 +274,24 @@ public class Entity : MonoBehaviour{
             Def = minZero(def);
         }
     }
+
+//  void InitCBT(string text, bool d)
+//  {
+//      GameObject parent = gameObject;
+//      GameObject prefab = Resources.Load("Prefabs/CBT") as GameObject;
+//      GameObject temp = Instantiate(prefab, parent.transform.position, Quaternion.identity, parent.transform);
+//
+//      temp.GetComponent<Text>().text = text;
+//
+//      if (d)
+//      {
+//          temp.GetComponent<Text>().color = new Color(255, 0, 0);
+//      } else
+//      {
+//          temp.GetComponent<Text>().color = new Color(0, 255, 0);
+//      }
+//
+//      temp.GetComponent<Animator>().SetTrigger("Hit");
+//      Destroy(temp.gameObject, 2);
+//  }
 }

@@ -22,6 +22,7 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move1(Entity target)
     {
+        InitHeal(target);
         Move move = new Move("Healing Touch", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1] + 2));
         target.Health += move.Dam;
         Debug.Log("Healing for " + move.Dam + " on " + target.Name);
@@ -104,4 +105,19 @@ public class Cleric : Entity
         target.StatusEffects["AttBuff"] += 5;
         Debug.Log(moveName + " on " + target.Name);
     }
+
+    void InitHeal(Entity target)
+    {
+        GameObject heal = Resources.Load("Prefabs/Heal") as GameObject;
+        GameObject temp = Instantiate(heal, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = heal.transform.localPosition;
+        temp.transform.localScale = heal.transform.localScale;
+        temp.transform.localRotation = heal.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger("HealCast");
+        Destroy(temp.gameObject, 2);
+    }
+
 }
