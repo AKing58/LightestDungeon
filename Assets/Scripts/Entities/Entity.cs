@@ -35,8 +35,10 @@ public class Entity : MonoBehaviour{
                 bm.turnOrder.Remove(this);
                 GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList.Remove(this);
                 bm.enemyList.Remove(this);
-                if(myPanel != null)
+                if(myPanel != null && Friendly)
                     Destroy(myPanel.gameObject);
+                if (myPanel!=null && !Friendly)
+                    myPanel.GetComponent<EnemyInfoPanelScript>().defeatedPanel();
                 Destroy(gameObject);
             }
         }
@@ -45,14 +47,9 @@ public class Entity : MonoBehaviour{
     public int Attack {
         get
         {
-            int tempValue;
-            if(ClassType == Vocation.Rogue)
-            {
-                tempValue = attack + StatusEffects["AttBuff"] + StatusEffects["AttBuffNext"];
-                StatusEffects["AttBuffNext"] = 0;
-                return tempValue;
-            }
-            return attack + StatusEffects["AttBuff"];
+            int tempValue = attack + StatusEffects["AttBuff"] + StatusEffects["AttBuffNext"];
+            StatusEffects["AttBuffNext"] = 0;
+            return tempValue;
         }
         set { attack = value; }
     }
@@ -64,13 +61,11 @@ public class Entity : MonoBehaviour{
             for(int i=0; i<2; i++)
             {
                 tempDam[i] += StatusEffects["DamBuff"];
-                if(ClassType == Vocation.Rogue)
-                    tempDam[i] += StatusEffects["DamBuffNext"];
+                tempDam[i] += StatusEffects["DamBuffNext"];
             }
-
-            if (ClassType == Vocation.Rogue)
-                StatusEffects["DamBuffNext"] = 0;
-                return tempDam; }
+            
+            StatusEffects["DamBuffNext"] = 0;
+            return tempDam; }
         set { damage = value; }
     }
     private int defence;
@@ -78,7 +73,9 @@ public class Entity : MonoBehaviour{
     {
         get
         {
-            return defence + StatusEffects["DefBuff"];
+            int tempDef = defence + StatusEffects["DefBuff"] + StatusEffects["DefBuffNext"];
+            StatusEffects["DefBuffNext"] = 0;
+            return tempDef;
         }
         set { defence = value; }
     }
@@ -135,6 +132,14 @@ public class Entity : MonoBehaviour{
         locPosx = transform.localPosition.x;
         locPosy = transform.localPosition.y;
         locPosz = transform.localPosition.z;
+
+        //if(Friendly)
+        //    parent = GameObject.Find("Players");
+        //else
+        //    parent = GameObject.Find("Enemies");
+        //
+        //destination = parent.transform.position + new Vector3(locPosx, locPosy, locPosz);
+
     }
 
     public void refreshStatusEffects()
@@ -241,6 +246,7 @@ public class Entity : MonoBehaviour{
     //Once the Entity performs the move on a target, moves on to the next turn
     public void didMove()
     {
+        //needsMovement = true;
         switchPosition();
         myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
         GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();
@@ -268,4 +274,31 @@ public class Entity : MonoBehaviour{
             Def = minZero(def);
         }
     }
+
+    //Vector3 originalPosition;
+    //Vector3 destination;
+    //bool needsMovement = false;
+    //float speed = 5f;
+    //GameObject parent;
+    //
+    //void Update()
+    //{
+    //
+    //    if (Friendly)
+    //        parent = GameObject.Find("Players");
+    //    else
+    //        parent = GameObject.Find("Enemies");
+    //    originalPosition = parent.transform.position + new Vector3(locPosx, locPosy, locPosz);
+    //    if (needsMovement)
+    //    {
+    //        destination = parent.transform.position + new Vector3(locPosx, locPosy, 4f);
+    //        needsMovement = false;
+    //    }
+    //    if(!isTurn)
+    //        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+    //    if (Vector3.Distance(transform.position, destination) < 0.001f)
+    //    {
+    //        destination = originalPosition;
+    //    }
+    //}
 }

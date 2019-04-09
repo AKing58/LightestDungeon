@@ -132,19 +132,36 @@ public class BattleManager : MonoBehaviour
         
         turnNo++;
         if (turnNo > turnOrder.Count - 1)
+        {
             turnNo = 0;
+            foreach(Entity e in turnOrder)
+                e.refreshStatusEffects();
+        }
         //Debug.Log(turnOrder[turnNo++].Name);
 
         if (turnOrder[turnNo].StatusEffects["Bleed"] > 0)
         {
-            turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
             Debug.Log(turnOrder[turnNo].Name + " took " + (turnOrder[turnNo].StatusEffects["Bleed"] + 1) + " bleed damage.");
+            if (turnOrder[turnNo].Health - turnOrder[turnNo].StatusEffects["Bleed"] <= 0)
+            {
+                turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
+                if (enemyList.Count == 0)
+                {
+                    Debug.Log("You Win!");
+                    gameOver();
+                    return;
+                }
+                currentTurn();
+                return;
+            }
+            turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
         }
+        
 
         if (turnOrder[turnNo].StatusEffects["Stun"] > 0)
         {
-            turnOrder[turnNo].StatusEffects["Stun"]--;
             Debug.Log(turnOrder[turnNo].Name + " missed a turn (Stun).");
+            turnOrder[turnNo].StatusEffects["Stun"]--;
             nextTurn();
         }
         else
@@ -160,6 +177,10 @@ public class BattleManager : MonoBehaviour
             Destroy(e.gameObject);
         foreach (Entity e in thisDungeon.playerList)
             e.myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
+        for(int i=1; i<=4; i++)
+        {
+            GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + i).GetComponent<EnemyInfoPanelScript>().resetPanel();
+        }
         Destroy(this);
     }
 

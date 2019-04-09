@@ -44,11 +44,12 @@ public class Mage : Entity
     /// <param name="target"></param>
     public override void move2(Entity target)
     {
-        foreach (Entity e in GameObject.Find("DungeonManager").GetComponent<BattleManager>().enemyList)
+        List<Entity> e = GameObject.Find("DungeonManager").GetComponent<BattleManager>().enemyList;
+        for (int i=0; i < e.Count; i++)
         {
-            Move move = new Move("Earthquake", rollDice(1, Attack), rollDice(1, e.Defence), rollDice(Damage[0], Damage[1]) - 3);
-            Debug.Log(Name + ": " + move.Name + " on " + e.Name + " for " + move.Dam);
-            e.Health += move.Dam;
+            Move move = new Move("Earthquake", rollDice(1, Attack), rollDice(1, e[i].Defence), rollDice(Damage[0], Damage[1]) - 5);
+            Debug.Log(Name + ": " + move.Name + " on " + e[i].Name + " for " + move.Dam);
+            e[i].Health -= move.Dam;
         }
         Debug.Log("Earthquake!");
     }

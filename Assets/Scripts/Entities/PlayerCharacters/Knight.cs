@@ -51,7 +51,10 @@ public class Knight : Entity
         {
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             if (rollDice(0,1) == 1)
+            {
+                Debug.Log("Stunned!");
                 target.StatusEffects["Stun"] += 1;
+            }
             target.Health -= move.Dam;
         }
         else
