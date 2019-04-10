@@ -8,6 +8,14 @@ using UnityEngine.UI;
 /// </summary>
 public class BattleManager : MonoBehaviour
 {
+    //Scoring
+    private int orcDefeated;
+    private int orcBlueDefeated;
+    private int orcRedDefeated;
+    private int skeletonDefeated;
+    private int zombieDefeated;
+    private int minotaurDefeated;
+
     public BattleManager instance;
     public List<Entity> enemyList;
     public DungeonManager thisDungeon;
@@ -18,7 +26,7 @@ public class BattleManager : MonoBehaviour
     /// Method to start the battle sequence
     /// Loads the enemy prefabs and game objects
     /// </summary>
-    public void initBattle()
+    public void initBattle(int cr)
     {
         thisDungeon = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         turnNo = 0;
@@ -38,6 +46,14 @@ public class BattleManager : MonoBehaviour
             GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + (i+1)).GetComponent<EnemyInfoPanelScript>().thisEntity = thisEnemy;
             enemyList.Add(thisEnemy);
         }
+
+        orcDefeated = 0;
+        orcBlueDefeated = 0;
+        orcRedDefeated = 0;
+        skeletonDefeated = 0;
+        zombieDefeated = 0;
+        minotaurDefeated = 0;
+
         initTurnOrder();
         for(int i=0; i<turnOrder.Count; i++)
         {
@@ -126,6 +142,9 @@ public class BattleManager : MonoBehaviour
         if(enemyList.Count == 0)
         {
             Debug.Log("You Win!");
+            Debug.Log(skeletonDefeated + zombieDefeated + orcDefeated + orcBlueDefeated+ orcRedDefeated+ minotaurDefeated);
+            thisDungeon.winScreen.battleWonScreen(skeletonDefeated, zombieDefeated, orcDefeated, orcBlueDefeated, orcRedDefeated, minotaurDefeated);
+
             gameOver();
             return;
         }
@@ -134,8 +153,6 @@ public class BattleManager : MonoBehaviour
         if (turnNo > turnOrder.Count - 1)
         {
             turnNo = 0;
-            foreach(Entity e in turnOrder)
-                e.refreshStatusEffects();
         }
         //Debug.Log(turnOrder[turnNo++].Name);
 
@@ -171,18 +188,36 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    IEnumerator waitToLoad()
+    {
+        yield return new WaitForSeconds(0.2f);
+    }
+
     private void gameOver()
     {
         foreach (Entity e in enemyList)
             Destroy(e.gameObject);
         foreach (Entity e in thisDungeon.playerList)
+        {
             e.myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
+            e.refreshStatusEffects();
+        }
         for(int i=1; i<=4; i++)
         {
             GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + i).GetComponent<EnemyInfoPanelScript>().resetPanel();
         }
+
+        thisDungeon.orcDefeated += orcDefeated;
+        thisDungeon.orcBlueDefeated += orcBlueDefeated;
+        thisDungeon.orcRedDefeated += orcRedDefeated;
+        thisDungeon.skeletonDefeated += skeletonDefeated;
+        thisDungeon.zombieDefeated += zombieDefeated;
+        thisDungeon.minotaurDefeated += minotaurDefeated;
+
+
         Destroy(this);
     }
+
 
     public int returnEnemyLocation(Entity target)
     {
@@ -203,5 +238,30 @@ public class BattleManager : MonoBehaviour
                 return i;
         }
         return -1;
+    }
+
+    public void incrementDefeated(string input)
+    {
+        switch (input)
+        {
+            case "Orc":
+                orcDefeated++;
+                break;
+            case "BlueOrc":
+                orcBlueDefeated++;
+                break;
+            case "RedOrc":
+                orcRedDefeated++;
+                break;
+            case "Skeleton":
+                skeletonDefeated++;
+                break;
+            case "Zombie":
+                zombieDefeated++;
+                break;
+            case "Minotaur":
+                minotaurDefeated++;
+                break;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CharacterInfoPanelScript : MonoBehaviour
@@ -11,6 +12,7 @@ public class CharacterInfoPanelScript : MonoBehaviour
     public Text NameTxt;
     public Text HPTxt;
     public Text AttackTxt;
+    public Text DamageTxt;
     public Text DefenceTxt;
     public GameObject SkillPanel;
     public SelectedSkill selectedSkill;
@@ -18,6 +20,7 @@ public class CharacterInfoPanelScript : MonoBehaviour
     public int panelNo;
 
     public Entity thisEntity;
+    public GameObject toolTip;
     
     // Start is called before the first frame update
     void Start()
@@ -38,13 +41,15 @@ public class CharacterInfoPanelScript : MonoBehaviour
             //thisEntity = thisDungeon.playerList[panelNo];
             ClassTxt.text = thisEntity.ClassType.ToString();
             NameTxt.text = thisEntity.Name;
-            if(thisEntity.StatusEffects["TempHealth"] > 0)
+            if (thisEntity.StatusEffects["TempHealth"] > 0)
                 HPTxt.text = "HP: " + thisEntity.Health.ToString() + "+(" + thisEntity.StatusEffects["TempHealth"] + ")" + "/" + thisEntity.Max_Health;
             else
                 HPTxt.text = "HP: " + thisEntity.Health.ToString() + "/" + thisEntity.Max_Health;
             AttackTxt.text = "Attack: " + thisEntity.Attack.ToString();
+            DamageTxt.text = "Damage: " + thisEntity.Damage[0].ToString() + "-" + thisEntity.Damage[1].ToString();
             DefenceTxt.text = "Defence: " + thisEntity.Defence.ToString();
-            thisEntity.myPanel = this.gameObject; 
+
+            thisEntity.myPanel = this.gameObject;
         }
     }
 
@@ -66,4 +71,6 @@ public class CharacterInfoPanelScript : MonoBehaviour
     {
         this.gameObject.SetActive(state);
     }
+
+
 }

@@ -80,8 +80,7 @@ public class SetParty : MonoBehaviour
         GameObject.Find("UI/LeftPanel/CharacterInfoPanel4").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
 
 
-        attachMovement();
-        partyWindow.SetActive(false);
+        StartCoroutine(waitToLoad());
     }
 
     //Creates a default party
@@ -100,8 +99,6 @@ public class SetParty : MonoBehaviour
         thisPlayer = playerObject.GetComponent<Entity>();
         thisDungeon.playerList.Add(thisPlayer);
         GameObject.Find("UI/LeftPanel/CharacterInfoPanel1").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
-
-
 
         // Creates the second player object, setting name, prefab, and class type
         playerPreFab = Resources.Load("Prefabs/Rogue") as GameObject;
@@ -131,7 +128,13 @@ public class SetParty : MonoBehaviour
         GameObject.Find("UI/LeftPanel/CharacterInfoPanel4").GetComponent<CharacterInfoPanelScript>().thisEntity = thisPlayer;
 
 
-        attachMovement();
+        StartCoroutine(waitToLoad());
+    }
+
+    IEnumerator waitToLoad()
+    {
+        yield return new WaitForSeconds(0.1f);
+        thisDungeon.startBattle();
         partyWindow.SetActive(false);
     }
 
@@ -171,18 +174,18 @@ public class SetParty : MonoBehaviour
         
     }
 
-    /// <summary>
-    /// Method that creates the movement button on the UI
-    /// </summary>
-    public void attachMovement()
-    {
-        GameObject movementButton;
-        Button moveBtn;
-        for (int i=0; i <thisDungeon.playerList.Count; i++)
-        {
-            movementButton = GameObject.Find("UI/LeftPanel/CharacterInfoPanel" + (i + 1) + "/SkillPanel/SkillBtn6");
-            moveBtn = movementButton.GetComponent<Button>();
-            moveBtn.onClick.AddListener(thisDungeon.playerList[i].switchPosition);
-        }
-    }
+    ///// <summary>
+    ///// Method that creates the movement button on the UI
+    ///// </summary>
+    //public void attachMovement()
+    //{
+    //    GameObject movementButton;
+    //    Button moveBtn;
+    //    for (int i=0; i <thisDungeon.playerList.Count; i++)
+    //    {
+    //        movementButton = GameObject.Find("UI/LeftPanel/CharacterInfoPanel" + (i + 1) + "/SkillPanel/SkillBtn6");
+    //        moveBtn = movementButton.GetComponent<Button>();
+    //        moveBtn.onClick.AddListener(thisDungeon.playerList[i].switchPosition);
+    //    }
+    //}
 }

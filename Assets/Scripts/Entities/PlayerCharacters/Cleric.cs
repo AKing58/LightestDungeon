@@ -10,6 +10,11 @@ public class Cleric : Entity
         createEntity(name, 1, 10, 8, new int[] { 1, 6 }, 12, 8);
         ClassType = Vocation.Cleric;
         Friendly = true;
+        md1 = new MoveDesc("Healing Touch", "Single", "0", "+2", "Heal", "Heal a target");
+        md2 = new MoveDesc("Mind Blast", "Single", "-2", "+5", "None", "High amount of damage, low amount to hit");
+        md3 = new MoveDesc("Group Heal", "Friendly", "0", "-2", "None", "Heal all friendlies for a lesser amount");
+        md4 = new MoveDesc("Smite", "Single", "+2", "0", "Heal", "Target an enemy. If they are damaged, heal a random Friendly for half as much");
+        md5 = new MoveDesc("Favour", "Single", "0", "0", "Buff", "Buff a target's attack by 5");
     }
 
     /// <summary>
@@ -53,14 +58,14 @@ public class Cleric : Entity
     /// <summary>
     /// Group Heal
     /// Att: NA
-    /// Dam: 0
+    /// Dam: -2
     /// Target: Single
     /// Status: None
     /// </summary>
     /// <param name="target"></param>
     public override void move3(Entity target)
     {
-        Move move = new Move("Group Heal", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1]));
+        Move move = new Move("Group Heal", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1]) - 2);
         foreach(Entity e in GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList)
         {
             e.Health += move.Dam;
@@ -69,8 +74,8 @@ public class Cleric : Entity
     }
 
     /// <summary>
-    /// Bash
-    /// Att: 0
+    /// Smite
+    /// Att: +2
     /// Dam: 0
     /// Target: Single
     /// Status: None
@@ -78,12 +83,14 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move4(Entity target)
     {
-        Move move = new Move("Bash", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]));
+        Move move = new Move("Smite", rollDice(1, Attack) + 2, rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]));
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            List<Entity> tempList = GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList;
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
+            tempList[rollDice(0, tempList.Count)].Health += (move.Dam / 2);
         }
         else
         {
@@ -91,7 +98,7 @@ public class Cleric : Entity
         }
     }
     /// <summary>
-    /// Favor
+    /// Favour
     /// -------Attack Buff
     /// Att: NA
     /// Dam: NA

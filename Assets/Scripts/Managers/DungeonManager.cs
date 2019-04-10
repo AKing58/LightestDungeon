@@ -7,11 +7,20 @@ using UnityEngine;
 /// </summary>
 public class DungeonManager : MonoBehaviour
 {
+    public int challengeRating = 0;
+    public int orcDefeated;
+    public int orcBlueDefeated;
+    public int orcRedDefeated;
+    public int skeletonDefeated;
+    public int zombieDefeated;
+    public int minotaurDefeated;
 
     public float[] position = { -4.5F, -1.5F, 1.5F, 4.5F };
     public static DungeonManager instance = null;
     public List<Entity> playerList;
     public BattleManager curBattle;
+
+    public BattleWinScreen winScreen;
 
     public System.Random randSeed;
 
@@ -35,7 +44,7 @@ public class DungeonManager : MonoBehaviour
         if(curBattle == null)
         {
             curBattle = gameObject.AddComponent<BattleManager>() as BattleManager;
-            curBattle.initBattle();
+            curBattle.initBattle(challengeRating);
             curBattle.currentTurn();
             Debug.Log("created");
         }
@@ -48,4 +57,6 @@ public class DungeonManager : MonoBehaviour
     {
         curBattle.currentTurn();
     }
+
+    
 }

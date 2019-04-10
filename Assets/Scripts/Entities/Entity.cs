@@ -40,6 +40,8 @@ public class Entity : MonoBehaviour{
             if (health <= 0)
             {
                 BattleManager bm = GameObject.Find("DungeonManager").GetComponent<BattleManager>();
+                if (!Friendly)
+                    bm.incrementDefeated(ClassType.ToString());
                 Debug.Log(Name + " Died");
                 //bm.nextTurn();
                 bm.turnOrder.Remove(this);
@@ -57,8 +59,7 @@ public class Entity : MonoBehaviour{
     public int Attack {
         get
         {
-            int tempValue = attack + StatusEffects["AttBuff"] + StatusEffects["AttBuffNext"];
-            StatusEffects["AttBuffNext"] = 0;
+            int tempValue = attack + StatusEffects["AttBuff"];
             return tempValue;
         }
         set { attack = value; }
@@ -70,11 +71,9 @@ public class Entity : MonoBehaviour{
             int[] tempDam = damage;
             for(int i=0; i<2; i++)
             {
-                tempDam[i] += StatusEffects["DamBuff"];
-                tempDam[i] += StatusEffects["DamBuffNext"];
+                tempDam[i] += StatusEffects["DamBuff"];;
             }
             
-            StatusEffects["DamBuffNext"] = 0;
             return tempDam; }
         set { damage = value; }
     }
@@ -83,13 +82,18 @@ public class Entity : MonoBehaviour{
     {
         get
         {
-            int tempDef = defence + StatusEffects["DefBuff"] + StatusEffects["DefBuffNext"];
-            StatusEffects["DefBuffNext"] = 0;
+            int tempDef = defence + StatusEffects["DefBuff"];
             return tempDef;
         }
         set { defence = value; }
     }
     public int Speed { get; set; }
+
+    public MoveDesc md1;
+    public MoveDesc md2;
+    public MoveDesc md3;
+    public MoveDesc md4;
+    public MoveDesc md5;
 
     //Status
     /// <summary>
@@ -122,11 +126,8 @@ public class Entity : MonoBehaviour{
     {
         StatusEffects = new Dictionary<string, int>();
         StatusEffects.Add("AttBuff", 0);
-        StatusEffects.Add("AttBuffNext", 0);
         StatusEffects.Add("DefBuff", 0);
-        StatusEffects.Add("DefBuffNext", 0);
         StatusEffects.Add("DamBuff", 0);
-        StatusEffects.Add("DamBuffNext", 0);
         StatusEffects.Add("TempHealth", 0);
         StatusEffects.Add("Stun", 0);
         StatusEffects.Add("Bleed", 0);
@@ -259,19 +260,19 @@ public class Entity : MonoBehaviour{
     //Once the Entity performs the move on a target, moves on to the next turn
     public void didMove()
     {
-        //needsMovement = true;
         switchPosition();
+        refreshStatusEffects();
         myPanel.transform.Find("SkillPanel").gameObject.SetActive(false);
         GameObject.Find("DungeonManager").GetComponent<BattleManager>().nextTurn();
     }
 
-    private static int minZero(int input)
+    private static int minOne(int input)
     {
-        if (input < 0)
-            return 0;
+        if (input < 1)
+            return 1;
         return input;
     }
-    
+
     public struct Move
     {
         public string Name;
@@ -282,31 +283,52 @@ public class Entity : MonoBehaviour{
         public Move(string name, int att, int def, int dam)
         {
             Name = name;
-            Att = minZero(att);
-            Dam = minZero(dam);
-            Def = minZero(def);
+            Att = minOne(att);
+            Dam = minOne(dam);
+            Def = minOne(def);
         }
     }
 
-//  void InitCBT(string text, bool d)
-//  {
-//      GameObject parent = gameObject;
-//      GameObject prefab = Resources.Load("Prefabs/CBT") as GameObject;
-//      GameObject temp = Instantiate(prefab, parent.transform.position, Quaternion.identity, parent.transform);
-//
-//      temp.GetComponent<Text>().text = text;
-//
-//      if (d)
-//      {
-//          temp.GetComponent<Text>().color = new Color(255, 0, 0);
-//      } else
-//      {
-//          temp.GetComponent<Text>().color = new Color(0, 255, 0);
-//      }
-//
-//      temp.GetComponent<Animator>().SetTrigger("Hit");
-//      Destroy(temp.gameObject, 2);
-//  }
+    public struct MoveDesc
+    {
+        public string Name;
+        public string Target;
+        public string AttMod;
+        public string DamMod;
+        public string Status;
+        public string Desc;
+
+        public MoveDesc(string name, string target, string att, string dam, string status, string desc)
+        {
+            Name = name;
+            Target = target;
+            AttMod = att;
+            DamMod = dam;
+            Status = status;
+            Desc = desc;
+        }
+    }
+
+    //  void InitCBT(string text, bool d)
+    //  {
+    //      GameObject parent = gameObject;
+    //      GameObject prefab = Resources.Load("Prefabs/CBT") as GameObject;
+    //      GameObject temp = Instantiate(prefab, parent.transform.position, Quaternion.identity, parent.transform);
+    //
+    //      temp.GetComponent<Text>().text = text;
+    //
+    //      if (d)
+    //      {
+    //          temp.GetComponent<Text>().color = new Color(255, 0, 0);
+    //      } else
+    //      {
+    //          temp.GetComponent<Text>().color = new Color(0, 255, 0);
+    //      }
+    //
+    //      temp.GetComponent<Animator>().SetTrigger("Hit");
+    //      Destroy(temp.gameObject, 2);
+    //  }
+
     //Vector3 originalPosition;
     //Vector3 destination;
     //bool needsMovement = false;
