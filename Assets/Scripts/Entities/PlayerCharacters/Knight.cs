@@ -71,7 +71,7 @@ public class Knight : Entity
         
     }
     /// <summary>
-    /// Cleave --------------NEEDS IMPLEMENTATION-----
+    /// Cleave
     /// Att: -1
     /// Dam: -2
     /// Target: Group
@@ -91,6 +91,7 @@ public class Knight : Entity
             Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
             if (move.Att > move.Def)
             {
+                InitAnimation("Slash", tempList[battleRef.returnEnemyLocation(target) + 1]);
                 Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) + 1].Name + " for " + move.Dam + ". Place: " + (battleRef.returnEnemyLocation(target) + 1));
                 tempList[battleRef.returnEnemyLocation(target) + 1].Health -= move.Dam;
             }
@@ -104,6 +105,7 @@ public class Knight : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Slash", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam + ". Main");
             target.Health -= move.Dam;
         }
@@ -117,6 +119,7 @@ public class Knight : Entity
             Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
             if (move.Att > move.Def)
             {
+                InitAnimation("Slash", tempList[battleRef.returnEnemyLocation(target) - 1]);
                 Debug.Log(Name + ": " + move.Name + " on " + tempList[battleRef.returnEnemyLocation(target) - 1].Name + " for " + move.Dam + ". Place: " + (battleRef.returnEnemyLocation(target) - 1));
                 tempList[battleRef.returnEnemyLocation(target) - 1].Health -= move.Dam;
             }

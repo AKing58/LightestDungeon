@@ -30,7 +30,7 @@ public class Mage : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            InitAnimation("Fireball", target);
+            InitAnimationSelf("Fireball");
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -53,6 +53,7 @@ public class Mage : Entity
         List<Entity> e = GameObject.Find("DungeonManager").GetComponent<BattleManager>().enemyList;
         for (int i=0; i < e.Count; i++)
         {
+            InitAnimation("Boulder", e[i]);
             Move move = new Move("Earthquake", rollDice(1, Attack), rollDice(1, e[i].Defence), rollDice(Damage[0], Damage[1]) - 5);
             Debug.Log(Name + ": " + move.Name + " on " + e[i].Name + " for " + move.Dam);
             e[i].Health -= move.Dam;
@@ -78,6 +79,8 @@ public class Mage : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimationSelf("LightningCast");
+            InitAnimation("Lightning", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             StatusEffects["AttBuff"] -= 1;
             target.Health -= move.Dam;
@@ -162,6 +165,20 @@ public class Mage : Entity
         GameObject temp = Instantiate(prefab, target.transform.position, Quaternion.identity);
         RectTransform tempRect = temp.GetComponent<RectTransform>();
         temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger(ani);
+        Destroy(temp.gameObject, 2);
+    }
+
+    void InitAnimationSelf(string ani)
+    {
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(gameObject.transform);
         temp.transform.localPosition = prefab.transform.localPosition;
         temp.transform.localScale = prefab.transform.localScale;
         temp.transform.localRotation = prefab.transform.localRotation;
