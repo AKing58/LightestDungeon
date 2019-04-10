@@ -10,6 +10,11 @@ public class Knight : Entity
         createEntity(name, 1, 10, 10, new int[] { 4, 8 }, 10, 8);
         ClassType = Vocation.Knight;
         Friendly = true;
+        md1 = new MoveDesc("Slash", "Single", "0", "0", "None", "Damage a target");
+        md2 = new MoveDesc("Shoulder Bash", "Single", "0", "-3", "Stun", "Lower damage, high chance to stun");
+        md3 = new MoveDesc("Cleave", "Single/Multi", "-1", "-2", "None", "Target an enemy and its neighbors");
+        md4 = new MoveDesc("Bolster", "Single", "0", "0", "Buff", "Give a target +5 defence");
+        md5 = new MoveDesc("Tank up", "Single", "0", "0", "Buff", "Give a target temporary health based on your damage");
     }
 
     /// <summary>
@@ -139,7 +144,7 @@ public class Knight : Entity
     }
 
     /// <summary>
-    /// 
+    /// Tank Up
     /// Att: NA
     /// Dam: NA
     /// Target: Single
@@ -150,7 +155,7 @@ public class Knight : Entity
     {
         InitAnimation("Buff", target);
         string moveName = "Tank Up";
-        target.StatusEffects["TempHealth"] += rollDice(3,10);
+        target.StatusEffects["TempHealth"] += rollDice(Damage[0], Damage[1]);
         Debug.Log(moveName + " on " + target.Name);
     }
 

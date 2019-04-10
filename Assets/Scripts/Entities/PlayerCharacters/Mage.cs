@@ -10,6 +10,11 @@ public class Mage : Entity
         createEntity(name, 1, 10, 9, new int[] { 6, 8 }, 8, 10);
         ClassType = Vocation.Mage;
         Friendly = true;
+        md1 = new MoveDesc("Fireball", "Single", "0", "+2", "None", "Shoot a fireball");
+        md2 = new MoveDesc("Earthquake", "Enemies", "0", "-5", "None", "Deals a small amount of guaranteed damage to all enemies");
+        md3 = new MoveDesc("Chain Lightning", "Single/Multi", "0", "-2", "None", "Target an enemy. If they are hit, target a random adjacent enemy until it misses");
+        md4 = new MoveDesc("Flash", "Enemies", "0", "0", "Stun", "Low chance to stun applied to all enemies");
+        md5 = new MoveDesc("Magic Missile", "Random", "-1", "-3", "None", "Randomly targets 3 enemies");
     }
     /// <summary>
     /// Fireball
@@ -38,7 +43,7 @@ public class Mage : Entity
     /// <summary>
     /// Earthquake
     /// Att: 0
-    /// Dam: 3
+    /// Dam: -5
     /// Target: All
     /// Status: None
     /// </summary>
@@ -123,7 +128,7 @@ public class Mage : Entity
     /// <summary>
     /// Magic Missiles
     /// ------Hits 3 targets randomly
-    /// Att: 0
+    /// Att: -1
     /// Dam: -3
     /// Target: All
     /// Status: stun
@@ -136,7 +141,7 @@ public class Mage : Entity
         for (int i=0; i<3; i++)
         {
             targetLoc = rollDice(0, bm.enemyList.Count);
-            Move move = new Move("Magic Missiles", rollDice(1, Attack), rollDice(1, bm.enemyList[targetLoc].Defence), rollDice(Damage[0], Damage[1]) - 4);
+            Move move = new Move("Magic Missiles", rollDice(1, Attack)-1, rollDice(1, bm.enemyList[targetLoc].Defence), rollDice(Damage[0], Damage[1]) - 3);
             if(move.Att > move.Def)
             {
                 Debug.Log(bm.enemyList[targetLoc].Name + " hit for " + move.Dam);
