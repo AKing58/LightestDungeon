@@ -23,6 +23,13 @@ public class Entity : MonoBehaviour{
         get { return health; }
         set
         {
+//           if (value < health && health != 0)
+//           {
+//               InitCBT((health - value).ToString(), true);
+//           } else if (health < value && health != 0)
+//           {
+//               InitCBT((value - health).ToString(), false);
+//           }
             if (StatusEffects["TempHealth"] > 0 && value < health)
             {
                 int tempTempHealth = StatusEffects["TempHealth"];
@@ -288,25 +295,30 @@ public class Entity : MonoBehaviour{
         }
     }
 
-//  void InitCBT(string text, bool d)
-//  {
-//      GameObject parent = gameObject;
-//      GameObject prefab = Resources.Load("Prefabs/CBT") as GameObject;
-//      GameObject temp = Instantiate(prefab, parent.transform.position, Quaternion.identity, parent.transform);
-//
-//      temp.GetComponent<Text>().text = text;
-//
-//      if (d)
-//      {
-//          temp.GetComponent<Text>().color = new Color(255, 0, 0);
-//      } else
-//      {
-//          temp.GetComponent<Text>().color = new Color(0, 255, 0);
-//      }
-//
-//      temp.GetComponent<Animator>().SetTrigger("Hit");
-//      Destroy(temp.gameObject, 2);
-//  }
+  void InitCBT(string text, bool d)
+  {
+      GameObject prefab = Resources.Load("Prefabs/CBT") as GameObject;
+      GameObject temp = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+      RectTransform tempRect = temp.GetComponent<RectTransform>();
+      temp.transform.SetParent(gameObject.transform);
+      temp.transform.localPosition = prefab.transform.localPosition;
+      temp.transform.localScale = prefab.transform.localScale;
+      temp.transform.localRotation = prefab.transform.localRotation;
+
+      temp.GetComponent<Text>().text = text;
+
+      if (d)
+      {
+          temp.GetComponent<Text>().color = new Color(255, 0, 0);
+      } else
+      {
+          temp.GetComponent<Text>().color = new Color(0, 255, 0);
+      }
+
+      temp.GetComponent<Animator>().SetTrigger("CBT");
+      Destroy(temp.gameObject, 2);
+  }
+
     //Vector3 originalPosition;
     //Vector3 destination;
     //bool needsMovement = false;

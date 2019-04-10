@@ -25,7 +25,7 @@ public class Mage : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            InitFireball();
+            InitAnimation("Fireball", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -151,17 +151,17 @@ public class Mage : Entity
         }
     }
 
-    void InitFireball()
+    void InitAnimation(string ani, Entity target)
     {
-        GameObject fireball = Resources.Load("Prefabs/Fireball") as GameObject;
-        GameObject temp = Instantiate(fireball, gameObject.transform.position, Quaternion.identity);
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, target.transform.position, Quaternion.identity);
         RectTransform tempRect = temp.GetComponent<RectTransform>();
-        temp.transform.SetParent(gameObject.transform);
-        temp.transform.localPosition = fireball.transform.localPosition;
-        temp.transform.localScale = fireball.transform.localScale;
-        temp.transform.localRotation = fireball.transform.localRotation;
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
 
-        temp.GetComponent<Animator>().SetTrigger("FireballCast");
+        temp.GetComponent<Animator>().SetTrigger(ani);
         Destroy(temp.gameObject, 2);
     }
 }

@@ -18,6 +18,7 @@ public class Orc : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitBash(target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -25,5 +26,19 @@ public class Orc : Entity
         {
             Debug.Log(move.Name + " on " + target.Name + " missed!");
         }
+    }
+
+    void InitBash(Entity target)
+    {
+        GameObject bash = Resources.Load("Prefabs/Bonk") as GameObject;
+        GameObject temp = Instantiate(bash, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = bash.transform.localPosition;
+        temp.transform.localScale = bash.transform.localScale;
+        temp.transform.localRotation = bash.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger("Bonk");
+        Destroy(temp.gameObject, 2);
     }
 }

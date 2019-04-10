@@ -26,6 +26,7 @@ public class Knight : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Slash", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -52,6 +53,7 @@ public class Knight : Entity
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             if (rollDice(1,10) <= 7)
             {
+                InitAnimation("Bonk", target);
                 Debug.Log("Stunned!");
                 target.StatusEffects["Stun"] += 1;
             }
@@ -130,6 +132,7 @@ public class Knight : Entity
     /// <param name="target"></param>
     public override void move4(Entity target)
     {
+        InitAnimation("Shield", target);
         string moveName = "Bolster";
         target.StatusEffects["DefBuff"] += 5;
         Debug.Log(moveName + " on " + target.Name);
@@ -145,8 +148,23 @@ public class Knight : Entity
     /// <param name="target"></param>
     public override void move5(Entity target)
     {
+        InitAnimation("Buff", target);
         string moveName = "Tank Up";
         target.StatusEffects["TempHealth"] += rollDice(3,10);
         Debug.Log(moveName + " on " + target.Name);
+    }
+
+    void InitAnimation(string ani, Entity target)
+    {
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger(ani);
+        Destroy(temp.gameObject, 2);
     }
 }

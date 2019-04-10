@@ -42,6 +42,7 @@ public class Cleric : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitMB(target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -63,6 +64,7 @@ public class Cleric : Entity
         Move move = new Move("Group Heal", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1]));
         foreach(Entity e in GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList)
         {
+            InitHeal(e);
             e.Health += move.Dam;
         }
         Debug.Log("Healing for " + move.Dam + " on party");
@@ -101,6 +103,7 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move5(Entity target)
     {
+        InitBuff(target);
         string moveName = "Favor";
         target.StatusEffects["AttBuff"] += 5;
         Debug.Log(moveName + " on " + target.Name);
@@ -117,6 +120,34 @@ public class Cleric : Entity
         temp.transform.localRotation = heal.transform.localRotation;
 
         temp.GetComponent<Animator>().SetTrigger("HealCast");
+        Destroy(temp.gameObject, 2);
+    }
+
+    void InitMB(Entity target)
+    {
+        GameObject mind = Resources.Load("Prefabs/MindBlast") as GameObject;
+        GameObject temp = Instantiate(mind, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = mind.transform.localPosition;
+        temp.transform.localScale = mind.transform.localScale;
+        temp.transform.localRotation = mind.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger("MindCast");
+        Destroy(temp.gameObject, 2);
+    }
+
+    void InitBuff(Entity target)
+    {
+        GameObject buff = Resources.Load("Prefabs/Buff") as GameObject;
+        GameObject temp = Instantiate(buff, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = buff.transform.localPosition;
+        temp.transform.localScale = buff.transform.localScale;
+        temp.transform.localRotation = buff.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger("Buff");
         Destroy(temp.gameObject, 2);
     }
 
