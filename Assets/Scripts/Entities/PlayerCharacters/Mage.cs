@@ -7,7 +7,7 @@ public class Mage : Entity
     //Initializes the Mage Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 10, 9, new int[] { 6, 8 }, 8, 10);
+        createEntity(name, 1, 10, 9, new int[] { 6, 8 }, 8);
         ClassType = Vocation.Mage;
         Friendly = true;
         md1 = new MoveDesc("Fireball", "Single", "0", "+2", "None", "Shoot a fireball");

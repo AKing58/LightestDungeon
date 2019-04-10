@@ -7,7 +7,7 @@ public class Knight : Entity
     //Initializes the Knight Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 10, 10, new int[] { 4, 8 }, 10, 8);
+        createEntity(name, 1, 10, 10, new int[] { 4, 8 }, 10);
         ClassType = Vocation.Knight;
         Friendly = true;
         md1 = new MoveDesc("Slash", "Single", "0", "0", "None", "Damage a target");

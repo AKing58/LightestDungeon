@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orc : Entity
+public class BlueOrc : Entity
 {
-    //Initializes the Orc Entity
+    //Initializes the BlueOrc Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 8, 8, new int[] { 2, 6 }, 8);
-        ClassType = Vocation.Orc;
+        createEntity(name, 1, 9, 9, new int[] { 2, 7 }, 9);
+        ClassType = Vocation.BlueOrc;
         Friendly = false;
     }
 
