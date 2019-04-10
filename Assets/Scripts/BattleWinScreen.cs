@@ -37,7 +37,18 @@ public class BattleWinScreen : MonoBehaviour
         orcBlueCountTxt.text = "Blue Orcs: " + blueOrc.ToString();
         orcRedCountTxt.text = "Red Orcs" + redOrc.ToString();
         minotaurCountTxt.text = "Minotaurs: " + minotaur.ToString();
+        checkLevelUp();
         Debug.Log("Win Screen Activated");
+    }
+
+    private void checkLevelUp()
+    {
+        DungeonManager dm = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
+        List<Entity> eList = dm.playerList;
+        if(eList[0].Level - 1 < (dm.challengeRating / 6)){
+            foreach (Entity e in eList)
+                e.levelUp();
+        }
     }
 
     public void closeWinScreen()

@@ -7,7 +7,7 @@ public class Cleric : Entity
     //Initializes the Cleric Entity
     public override void init(string name)
     {
-        createEntity(name, 1, 10, 8, new int[] { 1, 6 }, 12, 8);
+        createEntity(name, 1, 10, 8, new int[] { 1, 6 }, 12);
         ClassType = Vocation.Cleric;
         Friendly = true;
         md1 = new MoveDesc("Healing Touch", "Single", "0", "+2", "Heal", "Heal a target");

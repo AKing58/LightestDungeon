@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Entity : MonoBehaviour{
     //Custom Enums
-    public enum Vocation { Knight, Rogue, Cleric, Mage, Orc };
+    public enum Vocation { Knight, Rogue, Cleric, Mage, Skeleton, Zombie, Orc, BlueOrc, RedOrc, Minotaur };
     public enum Position { Front, Back };
 
     public bool Friendly { get; set; }
@@ -94,7 +94,6 @@ public class Entity : MonoBehaviour{
         }
         set { defence = value; }
     }
-    public int Speed { get; set; }
 
     public MoveDesc md1;
     public MoveDesc md2;
@@ -128,8 +127,26 @@ public class Entity : MonoBehaviour{
     //Used to access this character's info panel
     public GameObject myPanel;
 
+    public void levelUp()
+    {
+        Level++;
+        Max_Health += 2;
+        Health = Max_Health;
+        Attack++;
+        if(Level % 2 == 0)
+        {
+            if (Level % 4 == 0)
+                Damage[1]++;
+            else
+            {
+                Damage[0]++;
+            }
+        }
+        Defence++;
+    }
+
     //Basically a constructor
-    public void createEntity(string name, int lv, int hp, int att, int[] dam,int def, int speed)
+    public void createEntity(string name, int lv, int hp, int att, int[] dam, int def)
     {
         StatusEffects = new Dictionary<string, int>();
         StatusEffects.Add("AttBuff", 0);

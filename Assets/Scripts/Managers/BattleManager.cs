@@ -21,7 +21,40 @@ public class BattleManager : MonoBehaviour
     public DungeonManager thisDungeon;
     public List<Entity> turnOrder;
     public int turnNo;
-    
+
+    public int rollDice()
+    {
+        DungeonManager d = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
+        return d.randSeed.Next(0, d.challengeRating / 4);
+    }
+
+    public string randomUnlockedEnemy()
+    {
+        string outEnemy = "Skeleton";
+        switch (rollDice())
+        {
+            case 0:
+                outEnemy = "Skeleton";
+                break;
+            case 1:
+                outEnemy = "Zombie";
+                break;
+            case 2:
+                outEnemy = "Orc";
+                break;
+            case 3:
+                outEnemy = "BlueOrc";
+                break;
+            case 4:
+                outEnemy = "RedOrc";
+                break;
+            case 5:
+                outEnemy = "Minotaur";
+                break;
+        }
+        return outEnemy;
+    }
+
     /// <summary>
     /// Method to start the battle sequence
     /// Loads the enemy prefabs and game objects
@@ -38,10 +71,11 @@ public class BattleManager : MonoBehaviour
         
         for(int i=0; i<4; i++)
         {
-            enemyPreFab = Resources.Load("Prefabs/Orc") as GameObject;
+            string enemyType = randomUnlockedEnemy();
+            enemyPreFab = Resources.Load("Prefabs/" + enemyType) as GameObject;
             enemyObject = Instantiate(enemyPreFab, parent.transform.position + new Vector3(thisDungeon.position[enemyList.Count], 0, 1.5f), Quaternion.identity);
             enemyObject.transform.parent = parent.transform;
-            parseClassName(enemyObject, "Orc", "Orcman" + i);
+            parseClassName(enemyObject, enemyType, enemyType + "man");
             thisEnemy = enemyObject.GetComponent<Entity>();
             GameObject.Find("UI/RightPanel/EnemyInfo/EnemyInfoPanel" + (i+1)).GetComponent<EnemyInfoPanelScript>().thisEntity = thisEnemy;
             enemyList.Add(thisEnemy);
@@ -69,9 +103,34 @@ public class BattleManager : MonoBehaviour
     /// <param name="name"></param>
     public void parseClassName(GameObject g, string className, string name)
     {
-        if (className == "Orc")
+        if (className == "Skeleton")
+        {
+            Skeleton o = g.AddComponent<Skeleton>() as Skeleton;
+            o.init(name);
+        }
+        else if (className == "Zombie")
+        {
+            Zombie o = g.AddComponent<Zombie>() as Zombie;
+            o.init(name);
+        }
+        else if (className == "Orc")
         {
             Orc o = g.AddComponent<Orc>() as Orc;
+            o.init(name);
+        }
+        if (className == "BlueOrc")
+        {
+            BlueOrc o = g.AddComponent<BlueOrc>() as BlueOrc;
+            o.init(name);
+        }
+        else if (className == "RedOrc")
+        {
+            RedOrc o = g.AddComponent<RedOrc>() as RedOrc;
+            o.init(name);
+        }
+        else if (className == "Minotaur")
+        {
+            Minotaur o = g.AddComponent<Minotaur>() as Minotaur;
             o.init(name);
         }
         else
@@ -244,22 +303,28 @@ public class BattleManager : MonoBehaviour
     {
         switch (input)
         {
-            case "Orc":
-                orcDefeated++;
-                break;
-            case "BlueOrc":
-                orcBlueDefeated++;
-                break;
-            case "RedOrc":
-                orcRedDefeated++;
-                break;
             case "Skeleton":
+                thisDungeon.challengeRating++;
                 skeletonDefeated++;
                 break;
             case "Zombie":
+                thisDungeon.challengeRating += 2;
                 zombieDefeated++;
                 break;
+            case "Orc":
+                thisDungeon.challengeRating += 3;
+                orcDefeated++;
+                break;
+            case "BlueOrc":
+                thisDungeon.challengeRating += 4;
+                orcBlueDefeated++;
+                break;
+            case "RedOrc":
+                thisDungeon.challengeRating += 5;
+                orcRedDefeated++;
+                break;
             case "Minotaur":
+                thisDungeon.challengeRating += 6;
                 minotaurDefeated++;
                 break;
         }
