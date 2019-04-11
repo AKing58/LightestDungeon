@@ -227,6 +227,10 @@ public class BattleManager : MonoBehaviour
                     gameOver();
                     return;
                 }
+                if (turnNo > turnOrder.Count - 1)
+                {
+                    turnNo = 0;
+                }
                 currentTurn();
                 return;
             }
