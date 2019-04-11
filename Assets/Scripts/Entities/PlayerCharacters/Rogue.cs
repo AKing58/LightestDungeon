@@ -34,6 +34,7 @@ public class Rogue : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Shank", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.StatusEffects["Bleed"] += bleedValue;
             Debug.Log(target.Name + ": Bleed is now " + target.StatusEffects["Bleed"] + " per turn");
@@ -57,6 +58,7 @@ public class Rogue : Entity
     /// <param name="target"></param>
     public override void move2(Entity target)
     {
+        InitAnimationSelf("Poison");
         string moveName = "Poison Weapon";
         StatusEffects["DamBuff"] += 5;
         Debug.Log(moveName + " on " + Name + " Current Damage Buff: " + StatusEffects["DamBuff"]);
@@ -78,6 +80,7 @@ public class Rogue : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Mark", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.StatusEffects["DefBuff"] -= 5;
             target.Health -= move.Dam;
@@ -104,6 +107,7 @@ public class Rogue : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Disarm", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.StatusEffects["AttBuff"] -= 5;
             target.Health -= move.Dam;
@@ -125,8 +129,37 @@ public class Rogue : Entity
     /// <param name="target"></param>
     public override void move5(Entity target)
     {
+        InitAnimationSelf("Smoke");
         string moveName = "Dodge";
         StatusEffects["DefBuff"] += 100;
         Debug.Log(moveName + " on " + Name);
+    }
+
+    void InitAnimation(string ani, Entity target)
+    {
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger(ani);
+        Destroy(temp.gameObject, 2);
+    }
+
+    void InitAnimationSelf(string ani)
+    {
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(gameObject.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger(ani);
+        Destroy(temp.gameObject, 2);
     }
 }

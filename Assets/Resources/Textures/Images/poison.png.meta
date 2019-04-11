@@ -1,52 +1,21 @@
 fileFormatVersion: 2
-guid: f7be2bd3d7bc50141a90ccdec74348a7
+guid: ab25cdb5287a0b8479824ba19c46c2e4
 TextureImporter:
   fileIDToRecycleName:
-    21300000: light_0
-    21300002: light_1
-    21300004: light_2
-    21300006: light_3
-    21300008: light_4
-    21300010: light_5
-    21300012: light_6
-    21300014: light_7
-    21300016: light_8
-    21300018: light_9
-    21300020: light_10
-    21300022: light_11
-    21300024: light_12
-    21300026: light_13
-    21300028: light_14
-    21300030: light_15
-    21300032: light_16
-    21300034: light_17
-    21300036: light_18
-    21300038: light_19
-    21300040: light_20
-    21300042: light_21
-    21300044: light_22
-    21300046: light_23
-    21300048: light_24
-    21300050: light_25
-    21300052: light_26
-    21300054: light_27
-    21300056: light_28
-    21300058: light_29
-    21300060: light_30
-    21300062: light_31
-    21300064: light_32
-    21300066: light_33
-    21300068: light_34
-    21300070: light_35
-    21300072: light_36
-    21300074: light_37
-    21300076: light_38
-    21300078: light_39
-    21300080: light_40
-    21300082: light_41
-    21300084: light_42
-    21300086: light_43
-    21300088: light_44
+    21300000: poison_0
+    21300002: poison_1
+    21300004: poison_2
+    21300006: poison_3
+    21300008: poison_4
+    21300010: poison_5
+    21300012: poison_6
+    21300014: poison_7
+    21300016: poison_8
+    21300018: poison_9
+    21300020: poison_10
+    21300022: poison_11
+    21300024: poison_12
+    21300026: poison_13
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -129,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: light_0
+      name: poison_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,19 +106,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd187b6decb8a7d43911b1a495c6957f
+      spriteID: 769cd4f92f26de04a973f2ac3927348e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_1
+      name: poison_1
       rect:
         serializedVersion: 2
         x: 192
@@ -157,19 +126,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cef003fce29aea49ab14e492fe5c524
+      spriteID: 65c1031c08cc6194280c051d22e17ed6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_2
+      name: poison_2
       rect:
         serializedVersion: 2
         x: 384
@@ -177,19 +146,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c575cfc6ed397241b4bab4bfb72ecb8
+      spriteID: 357d795c9ad0d79469a4ec4467c4bc68
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_3
+      name: poison_3
       rect:
         serializedVersion: 2
         x: 576
@@ -197,19 +166,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40d8348cac69c864e828b39cdd63ae9c
+      spriteID: 2a435c608e787ba4ab36c3e2b311c97c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_4
+      name: poison_4
       rect:
         serializedVersion: 2
         x: 768
@@ -217,19 +186,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d0d9f668c3230c40819dba53eb7fdcb
+      spriteID: 01cf5372c85420646bbb894a10c673ae
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_5
+      name: poison_5
       rect:
         serializedVersion: 2
         x: 0
@@ -237,19 +206,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cd36b115966f8f498d9d33bc0bf5013
+      spriteID: 08ac1d46402183c47bef4b8d3c32fb50
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_6
+      name: poison_6
       rect:
         serializedVersion: 2
         x: 192
@@ -257,39 +226,39 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57a80008fd2c99c4fb7fa4718fb8d14e
+      spriteID: 92951c49a07fc354699ec2f92da79d15
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_7
+      name: poison_7
       rect:
         serializedVersion: 2
         x: 384
-        y: 198
+        y: 192
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d861eee25763e04f82cd999e4f733d6
+      spriteID: 7fe3baf700e33774c98284bc974a4598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_8
+      name: poison_8
       rect:
         serializedVersion: 2
         x: 576
@@ -297,19 +266,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb561d3a8e7a4974996182c9c1987b45
+      spriteID: a6766b2632d8aac4d86160088ba8ea0a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_9
+      name: poison_9
       rect:
         serializedVersion: 2
         x: 768
@@ -317,19 +286,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86c5ea47c9e54b247828cbafc895eb02
+      spriteID: 413b8fd2c42019043af3158c28bd0edc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_10
+      name: poison_10
       rect:
         serializedVersion: 2
         x: 0
@@ -337,19 +306,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da88393b36000334a923c6111db1f877
+      spriteID: 15c876115b668b04b9e34f3812ee6f3a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_11
+      name: poison_11
       rect:
         serializedVersion: 2
         x: 192
@@ -357,19 +326,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: abfc9fe2abe5bea4e9c1badbb2d32031
+      spriteID: d4785e8aa7cf2b64b8c7a3bef294c381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_12
+      name: poison_12
       rect:
         serializedVersion: 2
         x: 384
@@ -377,19 +346,19 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc54ffce00e48ae49a6d249f5afadcf3
+      spriteID: 7cd5131d34839224b9bedf4a6baa879e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: light_13
+      name: poison_13
       rect:
         serializedVersion: 2
         x: 576
@@ -397,33 +366,13 @@ TextureImporter:
         width: 192
         height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b55b58f9bbb68f4fabf2f244f486bb1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: light_14
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01b164ca7520c5245bffbf9a53e5def2
+      spriteID: c6436b2cca47ca6488cb2d3b326c596b
       vertices: []
       indices: 
       edges: []
@@ -431,7 +380,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3780d99bcbf581846beeb21fee64e8db
+    spriteID: 499b487bbb7a2e741bbb093c520a91dc
     vertices: []
     indices: 
     edges: []
