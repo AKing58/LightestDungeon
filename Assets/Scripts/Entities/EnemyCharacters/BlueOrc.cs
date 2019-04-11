@@ -18,6 +18,7 @@ public class BlueOrc : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Bonk", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -25,5 +26,19 @@ public class BlueOrc : Entity
         {
             Debug.Log(move.Name + " on " + target.Name + " missed!");
         }
+    }
+
+    void InitAnimation(string ani, Entity target)
+    {
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, target.transform.position, Quaternion.identity);
+        RectTransform tempRect = temp.GetComponent<RectTransform>();
+        temp.transform.SetParent(target.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
+
+        temp.GetComponent<Animator>().SetTrigger(ani);
+        Destroy(temp.gameObject, 2);
     }
 }
