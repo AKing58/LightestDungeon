@@ -45,7 +45,7 @@ public class BattleWinScreen : MonoBehaviour
     {
         DungeonManager dm = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         List<Entity> eList = dm.playerList;
-        if(eList[0].Level - 1 < (dm.challengeRating / 6)){
+        if(eList[0].Level - 1 < (dm.challengeRating / 8)){
             foreach (Entity e in eList)
                 e.levelUp();
         }

@@ -76,27 +76,45 @@ public class Mage : Entity
         int targetLocation = battleRef.returnEnemyLocation(target);
 
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
+
+        Debug.Log(targetLocation);
         if (move.Att > move.Def)
         {
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             StatusEffects["AttBuff"] -= 1;
-            target.Health -= move.Dam;
-            if (tempList.Count == 1)
+            if (tempList.Count <= 1)
                 return;
-            if (rollDice(0, 1) == 1)
+            if (target.Health - move.Dam <= 0)
             {
-                if (targetLocation >= 1)
-                    targetLocation--;
-                else
-                    targetLocation++;
+                Debug.Log("lightninged");
+                targetLocation--;
+                if (rollDice(0, 1) == 1)
+                {
+                    if (targetLocation >= 1)
+                        targetLocation--;
+                }
             }
             else
             {
-                if (targetLocation <= tempList.Count - 1)
-                    targetLocation++;
+                if (rollDice(0, 1) == 1)
+                {
+                    if (targetLocation >= 1)
+                        targetLocation--;
+                    else
+                        targetLocation++;
+                }
                 else
-                    targetLocation--;
+                {
+                    if (targetLocation <= tempList.Count - 1)
+                        targetLocation++;
+                    else
+                        targetLocation--;
+                }
             }
+
+            target.Health -= move.Dam;
+            Debug.Log("Yo:" + tempList.Count);
+            Debug.Log(targetLocation);
             move3(tempList[targetLocation]);
         }
         else
