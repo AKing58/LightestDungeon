@@ -235,6 +235,8 @@ public class BattleManager : MonoBehaviour
                 return;
             }
             turnOrder[turnNo].Health -= turnOrder[turnNo].StatusEffects["Bleed"]--;
+            if(turnOrder[turnNo].StatusEffects["Bleed"] <= 0)
+                turnOrder[turnNo].transform.Find("StatusUI/Bleed").gameObject.SetActive(false);
         }
         
 
@@ -242,6 +244,9 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log(turnOrder[turnNo].Name + " missed a turn (Stun).");
             turnOrder[turnNo].StatusEffects["Stun"]--;
+
+            if (turnOrder[turnNo].StatusEffects["Stun"] <= 0)
+                turnOrder[turnNo].transform.Find("StatusUI/Stun").gameObject.SetActive(false);
             nextTurn();
         }
         else

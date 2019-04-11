@@ -37,6 +37,7 @@ public class Rogue : Entity
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.StatusEffects["Bleed"] += bleedValue;
             Debug.Log(target.Name + ": Bleed is now " + target.StatusEffects["Bleed"] + " per turn");
+            target.transform.Find("StatusUI/Bleed").gameObject.SetActive(true);
             target.Health -= move.Dam;
         }
         else

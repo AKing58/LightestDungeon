@@ -89,7 +89,6 @@ public class Mage : Entity
                 return;
             if (target.Health - move.Dam <= 0)
             {
-                Debug.Log("lightninged");
                 targetLocation--;
                 if (rollDice(0, 1) == 1)
                 {
@@ -143,6 +142,7 @@ public class Mage : Entity
             {
                 Debug.Log("Stunned!");
                 e.StatusEffects["Stun"] += 1;
+                e.transform.Find("StatusUI/Stun").gameObject.SetActive(true);
             }
         }
     }

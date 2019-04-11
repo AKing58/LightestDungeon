@@ -61,6 +61,7 @@ public class Knight : Entity
                 InitAnimation("Bonk", target);
                 Debug.Log("Stunned!");
                 target.StatusEffects["Stun"] += 1;
+                target.transform.Find("StatusUI/Stun").gameObject.SetActive(true);
             }
             target.Health -= move.Dam;
         }
