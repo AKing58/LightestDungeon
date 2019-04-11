@@ -120,6 +120,7 @@ public class Entity : MonoBehaviour{
     //Used to access this character's info panel
     public GameObject myPanel;
 
+    //Applies stat increases to an entity
     public void levelUp()
     {
         Level++;
