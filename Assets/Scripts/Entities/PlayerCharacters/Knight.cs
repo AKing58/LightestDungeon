@@ -55,10 +55,10 @@ public class Knight : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Bonk", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             if (rollDice(1,10) <= 7)
             {
-                InitAnimation("Bonk", target);
                 Debug.Log("Stunned!");
                 target.StatusEffects["Stun"] += 1;
             }

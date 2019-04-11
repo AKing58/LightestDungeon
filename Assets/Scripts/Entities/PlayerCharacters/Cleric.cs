@@ -27,7 +27,7 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move1(Entity target)
     {
-        InitHeal(target);
+        InitAnimation("Heal", target);
         Move move = new Move("Healing Touch", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1] + 2));
         target.Health += move.Dam;
         Debug.Log("Healing for " + move.Dam + " on " + target.Name);
@@ -47,7 +47,7 @@ public class Cleric : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            InitMB(target);
+            InitAnimation("MindBlast", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -69,7 +69,7 @@ public class Cleric : Entity
         Move move = new Move("Group Heal", rollDice(1, Attack), 0, rollDice(Damage[0], Damage[1]) - 2);
         foreach(Entity e in GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList)
         {
-            InitHeal(e);
+            InitAnimation("Heal", e);
             e.Health += move.Dam;
         }
         Debug.Log("Healing for " + move.Dam + " on party");
@@ -89,6 +89,7 @@ public class Cleric : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
+            InitAnimation("Flash", target);
             List<Entity> tempList = GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList;
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
@@ -110,51 +111,37 @@ public class Cleric : Entity
     /// <param name="target"></param>
     public override void move5(Entity target)
     {
-        InitBuff(target);
+        InitAnimation("Buff", target);
         string moveName = "Favor";
         target.StatusEffects["AttBuff"] += 5;
         Debug.Log(moveName + " on " + target.Name);
     }
 
-    void InitHeal(Entity target)
+    void InitAnimation(string ani, Entity target)
     {
-        GameObject heal = Resources.Load("Prefabs/Heal") as GameObject;
-        GameObject temp = Instantiate(heal, target.transform.position, Quaternion.identity);
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, target.transform.position, Quaternion.identity);
         RectTransform tempRect = temp.GetComponent<RectTransform>();
         temp.transform.SetParent(target.transform);
-        temp.transform.localPosition = heal.transform.localPosition;
-        temp.transform.localScale = heal.transform.localScale;
-        temp.transform.localRotation = heal.transform.localRotation;
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
 
-        temp.GetComponent<Animator>().SetTrigger("HealCast");
+        temp.GetComponent<Animator>().SetTrigger(ani);
         Destroy(temp.gameObject, 2);
     }
 
-    void InitMB(Entity target)
+    void InitAnimationSelf(string ani)
     {
-        GameObject mind = Resources.Load("Prefabs/MindBlast") as GameObject;
-        GameObject temp = Instantiate(mind, target.transform.position, Quaternion.identity);
+        GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
+        GameObject temp = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
         RectTransform tempRect = temp.GetComponent<RectTransform>();
-        temp.transform.SetParent(target.transform);
-        temp.transform.localPosition = mind.transform.localPosition;
-        temp.transform.localScale = mind.transform.localScale;
-        temp.transform.localRotation = mind.transform.localRotation;
+        temp.transform.SetParent(gameObject.transform);
+        temp.transform.localPosition = prefab.transform.localPosition;
+        temp.transform.localScale = prefab.transform.localScale;
+        temp.transform.localRotation = prefab.transform.localRotation;
 
-        temp.GetComponent<Animator>().SetTrigger("MindCast");
-        Destroy(temp.gameObject, 2);
-    }
-
-    void InitBuff(Entity target)
-    {
-        GameObject buff = Resources.Load("Prefabs/Buff") as GameObject;
-        GameObject temp = Instantiate(buff, target.transform.position, Quaternion.identity);
-        RectTransform tempRect = temp.GetComponent<RectTransform>();
-        temp.transform.SetParent(target.transform);
-        temp.transform.localPosition = buff.transform.localPosition;
-        temp.transform.localScale = buff.transform.localScale;
-        temp.transform.localRotation = buff.transform.localRotation;
-
-        temp.GetComponent<Animator>().SetTrigger("Buff");
+        temp.GetComponent<Animator>().SetTrigger(ani);
         Destroy(temp.gameObject, 2);
     }
 

@@ -30,7 +30,7 @@ public class Mage : Entity
         Debug.Log("Att: " + move.Att + " vs Def: " + move.Def);
         if (move.Att > move.Def)
         {
-            InitAnimationSelf("Fireball");
+            InitAnimation("Fireball", target);
             Debug.Log(Name + ": " + move.Name + " on " + target.Name + " for " + move.Dam);
             target.Health -= move.Dam;
         }
@@ -123,6 +123,7 @@ public class Mage : Entity
         {
             if (rollDice(1, 5) <= 2)
             {
+                InitAnimation("Flash", e);
                 Debug.Log("Stunned!");
                 e.StatusEffects["Stun"] += 1;
             }
@@ -147,6 +148,8 @@ public class Mage : Entity
             Move move = new Move("Magic Missiles", rollDice(1, Attack)-1, rollDice(1, bm.enemyList[targetLoc].Defence), rollDice(Damage[0], Damage[1]) - 3);
             if(move.Att > move.Def)
             {
+                InitAnimationSelf("MagicMissileCast");
+                InitAnimation("MagicMissile", bm.enemyList[targetLoc]);
                 Debug.Log(bm.enemyList[targetLoc].Name + " hit for " + move.Dam);
                 bm.enemyList[targetLoc].Health -= move.Dam;
             }
