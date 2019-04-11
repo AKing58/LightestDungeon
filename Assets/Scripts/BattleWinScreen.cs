@@ -14,12 +14,12 @@ public class BattleWinScreen : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        skeletonCountTxt = GameObject.Find("UI/WinScreen/Killed/Panel/LeftScore/SkeletonCount").GetComponent<Text>();
-        zombieCountTxt = GameObject.Find("UI/WinScreen/Killed/Panel/LeftScore/ZombieCount").GetComponent<Text>();
-        orcCountTxt = GameObject.Find("UI/WinScreen/Killed/Panel/LeftScore/OrcCount").GetComponent<Text>();
-        orcBlueCountTxt = GameObject.Find("UI/WinScreen/Killed/Panel/RightScore/BlueOrcCount").GetComponent<Text>();
-        orcRedCountTxt = GameObject.Find("UI/WinScreen/Killed/Panel/RightScore/RedOrcCount").GetComponent<Text>();
-        minotaurCountTxt = GameObject.Find("UI/WinScreen/Killed/Panel/RightScore/MinotaurCount").GetComponent<Text>();
+        skeletonCountTxt = transform.Find("Killed/Panel/LeftScore/SkeletonCount").GetComponent<Text>();
+        zombieCountTxt = transform.Find("Killed/Panel/LeftScore/ZombieCount").GetComponent<Text>();
+        orcCountTxt = transform.Find("Killed/Panel/LeftScore/OrcCount").GetComponent<Text>();
+        orcBlueCountTxt = transform.Find("Killed/Panel/RightScore/BlueOrcCount").GetComponent<Text>();
+        orcRedCountTxt = transform.Find("Killed/Panel/RightScore/RedOrcCount").GetComponent<Text>();
+        minotaurCountTxt = transform.Find("Killed/Panel/RightScore/MinotaurCount").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -39,6 +39,19 @@ public class BattleWinScreen : MonoBehaviour
         minotaurCountTxt.text = "Minotaurs: " + minotaur.ToString();
         checkLevelUp();
         Debug.Log("Win Screen Activated");
+    }
+
+    public void battleLoseScreen()
+    {
+        DungeonManager thisDungeon = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
+        gameObject.SetActive(true);
+        skeletonCountTxt.text = "Skeletons: " + thisDungeon.skeletonDefeated;
+        zombieCountTxt.text = "Zombies: " + thisDungeon.zombieDefeated;
+        orcCountTxt.text = "Orcs: " + thisDungeon.orcDefeated;
+        orcBlueCountTxt.text = "Blue Orcs: " + thisDungeon.orcBlueDefeated;
+        orcRedCountTxt.text = "Red Orcs: " + thisDungeon.orcRedDefeated;
+        minotaurCountTxt.text = "Minotaurs: " + thisDungeon.minotaurDefeated;
+        Debug.Log("Lose Screen Activated");
     }
 
     private void checkLevelUp()
