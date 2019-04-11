@@ -195,13 +195,13 @@ public class BattleManager : MonoBehaviour
         if (GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList.Count == 0)
         {
             Debug.Log("You Lose");
+            thisDungeon.loseScreen.battleLoseScreen();
             gameOver();
             return;
         }
         if(enemyList.Count == 0)
         {
             Debug.Log("You Win!");
-            Debug.Log(skeletonDefeated + zombieDefeated + orcDefeated + orcBlueDefeated+ orcRedDefeated+ minotaurDefeated);
             thisDungeon.winScreen.battleWonScreen(skeletonDefeated, zombieDefeated, orcDefeated, orcBlueDefeated, orcRedDefeated, minotaurDefeated);
 
             gameOver();
@@ -224,6 +224,7 @@ public class BattleManager : MonoBehaviour
                 if (enemyList.Count == 0)
                 {
                     Debug.Log("You Win!");
+                    thisDungeon.winScreen.battleWonScreen(skeletonDefeated, zombieDefeated, orcDefeated, orcBlueDefeated, orcRedDefeated, minotaurDefeated);
                     gameOver();
                     return;
                 }

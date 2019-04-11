@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class EnemyInfoPanelScript : MonoBehaviour
 {
     public Text NameTxt;
-    public Text AttackTxt;
     public Text HealthTxt;
+    public Text AttackTxt;
+    public Text DefenceTxt;
+    public Text DamageTxt;
 
     public Entity thisEntity;
 
@@ -24,7 +26,9 @@ public class EnemyInfoPanelScript : MonoBehaviour
         {
             NameTxt.text = thisEntity.Name;
             HealthTxt.text = "HP: " + thisEntity.Health.ToString();
-            AttackTxt.text = "Attack: " + thisEntity.Attack.ToString();
+            AttackTxt.text = "Att: " + thisEntity.Attack.ToString();
+            DefenceTxt.text = "Def: " + thisEntity.Defence.ToString();
+            DamageTxt.text = "Dam: " + thisEntity.Damage[0].ToString() + "-" + thisEntity.Damage[1].ToString();
             thisEntity.myPanel = this.gameObject;
         }
     }

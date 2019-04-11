@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class DungeonManager : MonoBehaviour
 {
-    public int challengeRating = 0;
+    public int challengeRating;
     public int orcDefeated;
     public int orcBlueDefeated;
     public int orcRedDefeated;
@@ -21,6 +21,7 @@ public class DungeonManager : MonoBehaviour
     public BattleManager curBattle;
 
     public BattleWinScreen winScreen;
+    public BattleWinScreen loseScreen;
 
     public System.Random randSeed;
 
@@ -58,5 +59,8 @@ public class DungeonManager : MonoBehaviour
         curBattle.currentTurn();
     }
 
-    
+    public void exitGame()
+    {
+        Application.Quit();
+    }
 }
