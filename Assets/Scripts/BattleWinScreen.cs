@@ -28,6 +28,15 @@ public class BattleWinScreen : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Shows how many of each creature you killed
+    /// </summary>
+    /// <param name="skeleton"></param>
+    /// <param name="zombie"></param>
+    /// <param name="orc"></param>
+    /// <param name="blueOrc"></param>
+    /// <param name="redOrc"></param>
+    /// <param name="minotaur"></param>
     public void battleWonScreen(int skeleton, int zombie, int orc, int blueOrc, int redOrc, int minotaur)
     {
         gameObject.SetActive(true);
@@ -41,6 +50,9 @@ public class BattleWinScreen : MonoBehaviour
         Debug.Log("Win Screen Activated");
     }
 
+    /// <summary>
+    /// Shows how many creatures you killed before losing
+    /// </summary>
     public void battleLoseScreen()
     {
         DungeonManager thisDungeon = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
@@ -54,6 +66,9 @@ public class BattleWinScreen : MonoBehaviour
         Debug.Log("Lose Screen Activated");
     }
 
+    /// <summary>
+    /// Checks to see if the player characters will level up
+    /// </summary>
     private void checkLevelUp()
     {
         DungeonManager dm = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
@@ -65,6 +80,9 @@ public class BattleWinScreen : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Closes the win screen and starts the next battle
+    /// </summary>
     public void closeWinScreen()
     {
         gameObject.SetActive(false);

@@ -4,6 +4,9 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// https://www.youtube.com/watch?v=uPmorHLPwnk&ab_channel=inScopeStudios
+/// </summary>
 public class MoveToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Text moveNameTxt;
@@ -35,7 +38,10 @@ public class MoveToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         
     }
 
-
+    /// <summary>
+    /// Grabs the description of the button from mousing over the button
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log(gameObject.name=="SkillBtn1");
@@ -68,6 +74,11 @@ public class MoveToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         thisPanel.transform.Find("Tooltip").gameObject.SetActive(true);
     }
+
+    /// <summary>
+    /// Closes the tooltip when the mouse cursor leaves the button
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Exit " + thisMoveDesc.Name);

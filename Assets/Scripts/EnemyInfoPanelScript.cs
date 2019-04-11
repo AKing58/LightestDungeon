@@ -33,6 +33,9 @@ public class EnemyInfoPanelScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the text of defeated enemies
+    /// </summary>
     public void defeatedPanel()
     {
         NameTxt.text = "Defeated";
@@ -41,6 +44,9 @@ public class EnemyInfoPanelScript : MonoBehaviour
         thisEntity = null;
     }
 
+    /// <summary>
+    /// Resets the text on the enemy panel
+    /// </summary>
     public void resetPanel()
     {
         NameTxt.text = "";

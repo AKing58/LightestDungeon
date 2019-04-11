@@ -131,6 +131,10 @@ public class SetParty : MonoBehaviour
         StartCoroutine(waitToLoad());
     }
 
+    /// <summary>
+    /// Prevents exception by waiting for rest of the function to run before starting
+    /// </summary>
+    /// <returns></returns>
     IEnumerator waitToLoad()
     {
         yield return new WaitForSeconds(0.1f);

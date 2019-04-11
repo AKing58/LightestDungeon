@@ -23,13 +23,6 @@ public class Entity : MonoBehaviour{
         get { return health; }
         set
         {
-//           if (value < health && health != 0)
-//           {
-//               InitCBT((health - value).ToString(), true);
-//           } else if (health < value && health != 0)
-//           {
-//               InitCBT((value - health).ToString(), false);
-//           }
             if (StatusEffects["TempHealth"] > 0 && value < health)
             {
                 int tempTempHealth = StatusEffects["TempHealth"];
@@ -179,6 +172,9 @@ public class Entity : MonoBehaviour{
 
     }
 
+    /// <summary>
+    /// Resets all the effects on the characters
+    /// </summary>
     public void refreshStatusEffects()
     {
         StatusEffects["AttBuff"] = 0;
@@ -275,6 +271,7 @@ public class Entity : MonoBehaviour{
         didMove();
     }
 
+    //Random generator
     public int rollDice(int min, int max)
     {
         DungeonManager d = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
@@ -297,6 +294,9 @@ public class Entity : MonoBehaviour{
         return input;
     }
 
+    /// <summary>
+    /// Struct for the actions of each entity
+    /// </summary>
     public struct Move
     {
         public string Name;
@@ -313,6 +313,9 @@ public class Entity : MonoBehaviour{
         }
     }
 
+    /// <summary>
+    /// Struct for actions descending that an entity can do
+    /// </summary>
     public struct MoveDesc
     {
         public string Name;

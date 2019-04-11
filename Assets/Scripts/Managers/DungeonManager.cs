@@ -59,6 +59,9 @@ public class DungeonManager : MonoBehaviour
         curBattle.currentTurn();
     }
 
+    /// <summary>
+    /// Exit game button
+    /// </summary>
     public void exitGame()
     {
         Application.Quit();

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Sets the text and updates the score for each enemy killed
+/// </summary>
 public class ScoreScript : MonoBehaviour
 {
     private Text orcCountTxt;

@@ -12,6 +12,10 @@ public class Orc : Entity
         Friendly = false;
     }
 
+    /// <summary>
+    /// Bash action that the Orc uses
+    /// </summary>
+    /// <param name="target"></param>
     public override void move1(Entity target)
     {
         Move move = new Move("Bash", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]));
@@ -28,6 +32,10 @@ public class Orc : Entity
         }
     }
 
+    /// <summary>
+    /// Initiates bash animations, loading a prefab as a gameobject
+    /// </summary>
+    /// <param name="target"></param>
     void InitBash(Entity target)
     {
         GameObject bash = Resources.Load("Prefabs/Bonk") as GameObject;

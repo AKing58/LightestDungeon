@@ -163,6 +163,11 @@ public class Knight : Entity
         Debug.Log(moveName + " on " + target.Name);
     }
 
+    /// <summary>
+    /// Initiates animations, loading a prefab as a gameobject
+    /// </summary>
+    /// <param name="ani"></param>
+    /// <param name="target"></param>
     void InitAnimation(string ani, Entity target)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;

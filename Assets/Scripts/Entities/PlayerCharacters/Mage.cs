@@ -180,6 +180,11 @@ public class Mage : Entity
         }
     }
 
+    /// <summary>
+    /// Initiates animations, loading a prefab as a gameobject
+    /// </summary>
+    /// <param name="ani"></param>
+    /// <param name="target"></param>
     void InitAnimation(string ani, Entity target)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
@@ -194,6 +199,10 @@ public class Mage : Entity
         Destroy(temp.gameObject, 2);
     }
 
+    /// <summary>
+    /// Initiates animation, loading a prefab as a gameobject but doesn't require a target
+    /// </summary>
+    /// <param name="ani"></param>
     void InitAnimationSelf(string ani)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;

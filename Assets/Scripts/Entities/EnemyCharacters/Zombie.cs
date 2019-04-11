@@ -12,6 +12,10 @@ public class Zombie : Entity
         Friendly = false;
     }
 
+    /// <summary>
+    /// Swipe action that the Zombie uses
+    /// </summary>
+    /// <param name="target"></param>
     public override void move1(Entity target)
     {
         Move move = new Move("Swipe", rollDice(1, Attack), rollDice(1, target.Defence), rollDice(Damage[0], Damage[1]));
@@ -28,6 +32,11 @@ public class Zombie : Entity
         }
     }
 
+    /// <summary>
+    /// Initiates animations, loading a prefab as a gameobject
+    /// </summary>
+    /// <param name="ani"></param>
+    /// <param name="target"></param>
     void InitAnimation(string ani, Entity target)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;

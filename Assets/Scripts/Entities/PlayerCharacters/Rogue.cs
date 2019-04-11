@@ -135,6 +135,11 @@ public class Rogue : Entity
         Debug.Log(moveName + " on " + Name);
     }
 
+    /// <summary>
+    /// Initiates the animation, taking a string and a target
+    /// </summary>
+    /// <param name="ani"></param>
+    /// <param name="target"></param>
     void InitAnimation(string ani, Entity target)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
@@ -149,6 +154,10 @@ public class Rogue : Entity
         Destroy(temp.gameObject, 2);
     }
 
+    /// <summary>
+    /// Initiates the animation, taking a string and doesn't require a target
+    /// </summary>
+    /// <param name="ani"></param>
     void InitAnimationSelf(string ani)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;

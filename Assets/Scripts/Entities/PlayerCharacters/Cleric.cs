@@ -117,6 +117,11 @@ public class Cleric : Entity
         Debug.Log(moveName + " on " + target.Name);
     }
 
+    /// <summary>
+    /// Initiates animations, loading a prefab as a gameobject
+    /// </summary>
+    /// <param name="ani"></param>
+    /// <param name="target"></param>
     void InitAnimation(string ani, Entity target)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;
@@ -131,6 +136,11 @@ public class Cleric : Entity
         Destroy(temp.gameObject, 2);
     }
 
+    /// <summary>
+    /// Initiates animations, loading a prefab as a gameobject but doesn't require a target
+    /// </summary>
+    /// <param name="ani"></param>
+    /// <param name="target"></param>
     void InitAnimationSelf(string ani)
     {
         GameObject prefab = Resources.Load("Prefabs/" + ani) as GameObject;

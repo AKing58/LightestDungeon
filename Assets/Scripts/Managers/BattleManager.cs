@@ -22,12 +22,20 @@ public class BattleManager : MonoBehaviour
     public List<Entity> turnOrder;
     public int turnNo;
 
+    /// <summary>
+    /// Random generator for spawning enemies
+    /// </summary>
+    /// <returns></returns>
     public int rollDice()
     {
         DungeonManager d = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         return d.randSeed.Next(0, d.challengeRating / 4);
     }
 
+    /// <summary>
+    /// Loads different enemies to face by random
+    /// </summary>
+    /// <returns></returns>
     public string randomUnlockedEnemy()
     {
         string outEnemy = "Skeleton";
@@ -262,6 +270,9 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
     }
 
+    /// <summary>
+    /// Clears the board when the player loses
+    /// </summary>
     private void gameOver()
     {
         foreach (Entity e in enemyList)
@@ -287,7 +298,11 @@ public class BattleManager : MonoBehaviour
         Destroy(this);
     }
 
-
+    /// <summary>
+    /// Gets the enemy entity location
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
     public int returnEnemyLocation(Entity target)
     {
         for (int i = 0; i < enemyList.Count; i++)
@@ -298,6 +313,11 @@ public class BattleManager : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// Gets the player entity location
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
     public int returnPlayerLocation(Entity target)
     {
         List<Entity> pList = GameObject.Find("DungeonManager").GetComponent<DungeonManager>().playerList;
@@ -309,6 +329,10 @@ public class BattleManager : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// Increases challenge rating depending on monsters killed
+    /// </summary>
+    /// <param name="input"></param>
     public void incrementDefeated(string input)
     {
         switch (input)
